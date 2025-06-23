@@ -31,7 +31,7 @@
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <!-- Paypal Express (se reemplazao el viejo)-->
-    <script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Adq3MV0Gs9G0y3-i8P1_aiivBE9O_hGhsLkwRH-tmuCUN8WPdjs0B0_zCGgEJMOt1pZlPrNY1pUaFo6g&currency=USD"></script>
     <!-- Google Recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
 

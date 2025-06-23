@@ -5,9 +5,9 @@
 		$output .= '
 			<div class="alert alert-danger">
                 <h4><i class="icon fa fa-warning"></i> Error!</h4>
-                Code to activate account not found.
+                No se pudo encontrar el código para activar su cuenta.
             </div>
-            <h4>You may <a href="signup.php">Signup</a> or back to <a href="index.php">Homepage</a>.</h4>
+            <h4>Debe <a href="signup.php">Registrarse</a> o volver a <a href="index.php">Home</a>.</h4>
 		'; 
 	}
 	else{
@@ -24,7 +24,7 @@
 		                <h4><i class="icon fa fa-warning"></i> Error!</h4>
 		                Cuenta activada correctamente.
 		            </div>
-		            <h4>Debes <a href="login.php">Iniciar Sesión</a> o volver a <a href="index.php">Home</a>.</h4>
+		            <h4>Debe <a href="login.php">Iniciar Sesión</a> o volver a <a href="index.php">Home</a>.</h4>
 				';
 			}
 			else{
@@ -36,7 +36,7 @@
 			                <h4><i class="icon fa fa-check"></i> Success!</h4>
 			                Cuenta activada - Email: <b>'.$row['email'].'</b>.
 			            </div>
-			            <h4>Debes <a href="login.php">Iniciar Sesión</a> o volver a <a href="index.php">Home</a>.</h4>
+			            <h4>Debe <a href="login.php">Iniciar Sesión</a> o volver a <a href="index.php">Home</a>.</h4>
 					';
 				}
 				catch(PDOException $e){
@@ -45,7 +45,7 @@
 			                <h4><i class="icon fa fa-warning"></i> Error!</h4>
 			                '.$e->getMessage().'
 			            </div>
-			            <h4>You may <a href="signup.php">Signup</a> or back to <a href="index.php">Homepage</a>.</h4>
+			            <h4>Debe <a href="signup.php">Registrarse</a> o volver a <a href="index.php">Home</a>.</h4>
 					';
 				}
 
@@ -56,9 +56,9 @@
 			$output .= '
 				<div class="alert alert-danger">
 	                <h4><i class="icon fa fa-warning"></i> Error!</h4>
-	                Cannot activate account. Wrong code.
+	                No se activó su cuenta. Código incorrecto.
 	            </div>
-	            <h4>You may <a href="signup.php">Signup</a> or back to <a href="index.php">Homepage</a>.</h4>
+	            <h4>Debe <a href="signup.php">Registrarse</a> o volver a <a href="index.php">Home</a>.</h4>
 			';
 		}
 

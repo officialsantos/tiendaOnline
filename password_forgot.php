@@ -21,7 +21,7 @@
       }
     ?>
   	<div class="login-box-body">
-    	<p class="login-box-msg">Enter email associated with account</p>
+    	<p class="login-box-msg">Ingrese email de la cuenta</p>
 
     	<form action="reset.php" method="POST">
       		<div class="form-group has-feedback">
@@ -30,12 +30,12 @@
       		</div>
       		<div class="row">
     			<div class="col-xs-4">
-          			<button type="submit" class="btn btn-primary btn-block btn-flat" name="reset"><i class="fa fa-mail-forward"></i> Send</button>
+          			<button type="submit" class="btn btn-primary btn-block btn-flat" name="reset"><i class="fa fa-mail-forward"></i> Enviar</button>
         		</div>
       		</div>
     	</form>
       <br>
-      <a href="login.php">I rememberd my password</a><br>
+      <a href="login.php">Recordé mi contraseña</a><br>
       <a href="index.php"><i class="fa fa-home"></i> Home</a>
   	</div>
 </div>

@@ -12,16 +12,16 @@
 	      <section class="content">
 	        <div class="row">
 	        	<div class="col-sm-9">
-	        		<h1 class="page-header">YOUR CART</h1>
+	        		<h1 class="page-header">SU CARRITO</h1>
 	        		<div class="box box-solid">
 	        			<div class="box-body">
 		        		<table class="table table-bordered">
 		        			<thead>
 		        				<th></th>
-		        				<th>Photo</th>
-		        				<th>Name</th>
-		        				<th>Price</th>
-		        				<th width="20%">Quantity</th>
+		        				<th>Foto</th>
+		        				<th>Nombre</th>
+		        				<th>Precio</th>
+		        				<th width="20%">Cantidad</th>
 		        				<th>Subtotal</th>
 		        			</thead>
 		        			<tbody id="tbody">
@@ -37,7 +37,7 @@
 	        			}
 	        			else{
 	        				echo "
-	        					<h4>You need to <a href='login.php'>Login</a> to checkout.</h4>
+	        					<h4>Necesitas <a href='login.php'>Iniciar Sesión</a> para comprar.</h4>
 	        				";
 	        			}
 	        		?>

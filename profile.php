@@ -44,11 +44,11 @@
 	        				<div class="col-sm-9">
 	        					<div class="row">
 	        						<div class="col-sm-3">
-	        							<h4>Name:</h4>
+	        							<h4>Nombre:</h4>
 	        							<h4>Email:</h4>
-	        							<h4>Contact Info:</h4>
-	        							<h4>Address:</h4>
-	        							<h4>Member Since:</h4>
+	        							<h4>Info. de Contacto:</h4>
+	        							<h4>Dirección:</h4>
+	        							<h4>Miembro desde:</h4>
 	        						</div>
 	        						<div class="col-sm-9">
 	        							<h4><?php echo $user['firstname'].' '.$user['lastname']; ?>
@@ -67,16 +67,16 @@
 	        		</div>
 	        		<div class="box box-solid">
 	        			<div class="box-header with-border">
-	        				<h4 class="box-title"><i class="fa fa-calendar"></i> <b>Transaction History</b></h4>
+	        				<h4 class="box-title"><i class="fa fa-calendar"></i> <b>Historial de Transacciones</b></h4>
 	        			</div>
 	        			<div class="box-body">
 	        				<table class="table table-bordered" id="example1">
 	        					<thead>
 	        						<th class="hidden"></th>
-	        						<th>Date</th>
-	        						<th>Transaction#</th>
-	        						<th>Amount</th>
-	        						<th>Full Details</th>
+	        						<th>Fecha</th>
+	        						<th>Transacción#</th>
+	        						<th>Cantidad</th>
+	        						<th>Detalles Completos</th>
 	        					</thead>
 	        					<tbody>
 	        					<?php
@@ -99,14 +99,14 @@
 	        										<td>".date('M d, Y', strtotime($row['sales_date']))."</td>
 	        										<td>".$row['pay_id']."</td>
 	        										<td>&#36; ".number_format($total, 2)."</td>
-	        										<td><button class='btn btn-sm btn-flat btn-info transact' data-id='".$row['id']."'><i class='fa fa-search'></i> View</button></td>
+	        										<td><button class='btn btn-sm btn-flat btn-info transact' data-id='".$row['id']."'><i class='fa fa-search'></i> Ver</button></td>
 	        									</tr>
 	        								";
 	        							}
 
 	        						}
         							catch(PDOException $e){
-										echo "There is some problem in connection: " . $e->getMessage();
+										echo "Hubo un problema en la conexión: " . $e->getMessage();
 									}
 
 	        						$pdo->close();

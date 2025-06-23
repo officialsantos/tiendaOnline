@@ -46,8 +46,8 @@
 		                  <span class="fa fa-angle-right"></span>
 		                </a>
 		            </div>
-		            <h2>Monthly Top Sellers</h2>
-		       		<?php
+		            <!--<h2>Monthly Top Sellers</h2>
+		       		?php
 		       			$month = date('m');
 		       			$conn = $pdo->open();
 
@@ -83,7 +83,7 @@
 
 						$pdo->close();
 
-		       		?> 
+		       		?> CUANDO SE QUIERA REACTIVAR, ELIMINAR COMENTARIO Y AÑADIR "<" AL PHP-->
 	        	</div>
 	        	<div class="col-sm-3">
 	        		<?php include 'includes/sidebar.php'; ?>

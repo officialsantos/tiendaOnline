@@ -24,7 +24,7 @@
 			// $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
 			if (!$resp->isSuccess()){
-		  		$_SESSION['error'] = 'Please answer recaptcha correctly';
+		  		$_SESSION['error'] = 'Por favor, responda el captcha correctamente';
 		  		header('location: signup.php');	
 		  		exit();	
 		  	}	
@@ -35,7 +35,7 @@
 		}
 
 		if($password != $repassword){
-			$_SESSION['error'] = 'Passwords did not match';
+			$_SESSION['error'] = 'Las contraseñas no coinciden';
 			header('location: signup.php');
 		}
 		else{
@@ -45,7 +45,7 @@
 			$stmt->execute(['email'=>$email]);
 			$row = $stmt->fetch();
 			if($row['numrows'] > 0){
-				$_SESSION['error'] = 'Email already taken';
+				$_SESSION['error'] = 'Email ya en uso';
 				header('location: signup.php');
 			}
 			else{
@@ -62,12 +62,12 @@
 					$userid = $conn->lastInsertId();
 
 					$message = "
-						<h2>Thank you for Registering.</h2>
-						<p>Your Account:</p>
+						<h2>Gracias por registrarte</h2>
+						<p>Tu Cuenta:</p>
 						<p>Email: ".$email."</p>
-						<p>Password: ".$_POST['password']."</p>
-						<p>Please click the link below to activate your account.</p>
-						<a href='http://localhost/ecommerce/activate.php?code=".$code."&user=".$userid."'>Activate Account</a>
+						<p>Contraseña: ".$_POST['password']."</p>
+						<p>Por favor, cliquee en el enlace para activar su cuenta.</p>
+						<a href='http://localhost/ecommerce/activate.php?code=".$code."&user=".$userid."'>Activar Cuenta</a>
 					";
 
 					//Load phpmailer
@@ -108,12 +108,12 @@
 				        unset($_SESSION['lastname']);
 				        unset($_SESSION['email']);
 
-				        $_SESSION['success'] = 'Account created. Check your email to activate.';
+				        $_SESSION['success'] = 'Cuenta creada. Revise su email para continuar.';
 				        header('location: signup.php');
 
 				    } 
 				    catch (Exception $e) {
-				        $_SESSION['error'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
+				        $_SESSION['error'] = 'El mensaje no pudo ser enviado. Mailer Error: '.$mail->ErrorInfo;
 				        header('location: signup.php');
 				    }
 
@@ -132,7 +132,7 @@
 
 	}
 	else{
-		$_SESSION['error'] = 'Fill up signup form first';
+		$_SESSION['error'] = 'Rellena el formulario antes de continuar';
 		header('location: signup.php');
 	}
 

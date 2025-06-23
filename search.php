@@ -54,7 +54,7 @@
 							
 						}
 						catch(PDOException $e){
-							echo "There is some problem in connection: " . $e->getMessage();
+							echo "Hubo un problema en la conexión: " . $e->getMessage();
 						}
 					}
 

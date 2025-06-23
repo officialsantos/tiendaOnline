@@ -22,11 +22,11 @@
 				$stmt->execute(['code'=>$code, 'id'=>$row['id']]);
 				
 				$message = "
-					<h2>Password Reset</h2>
-					<p>Your Account:</p>
+					<h2>Reinicio de Contraseña</h2>
+					<p>Tu cuenta:</p>
 					<p>Email: ".$email."</p>
-					<p>Please click the link below to reset your password.</p>
-					<a href='http://localhost/ecommerce/password_reset.php?code=".$code."&user=".$row['id']."'>Reset Password</a>
+					<p>Por favor, cliquee en el enlace para reestablecer tu contraseña.</p>
+					<a href='http://localhost/ecommerce/password_reset.php?code=".$code."&user=".$row['id']."'>Reiniciar Contraseña</a>
 				";
 
 				//Load phpmailer
@@ -63,11 +63,11 @@
 
 			        $mail->send();
 
-			        $_SESSION['success'] = 'Password reset link sent';
+			        $_SESSION['success'] = 'Enlace de reinicio de contraseña enviado';
 			     
 			    } 
 			    catch (Exception $e) {
-			        $_SESSION['error'] = 'Message could not be sent. Mailer Error: '.$mail->ErrorInfo;
+			        $_SESSION['error'] = 'El enlace no pudo ser enviado. Mailer Error: '.$mail->ErrorInfo;
 			    }
 			}
 			catch(PDOException $e){
@@ -75,14 +75,14 @@
 			}
 		}
 		else{
-			$_SESSION['error'] = 'Email not found';
+			$_SESSION['error'] = 'Email no encontrado';
 		}
 
 		$pdo->close();
 
 	}
 	else{
-		$_SESSION['error'] = 'Input email associated with account';
+		$_SESSION['error'] = 'Correo seleccionado ya asociado con su cuenta';
 	}
 
 	header('location: password_forgot.php');
