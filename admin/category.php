@@ -11,12 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Category
+        Categoría
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Products</li>
-        <li class="active">Category</li>
+        <li>Productos</li>
+        <li class="active">Categoría</li>
       </ol>
     </section>
 
@@ -53,8 +53,8 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Category Name</th>
-                  <th>Tools</th>
+                  <th>Nombre de Categoría</th>
+                  <th>Herramientas</th>
                 </thead>
                 <tbody>
                   <?php

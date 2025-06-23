@@ -19,12 +19,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Product List
+        Lista de Productos
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li>Products</li>
-        <li class="active">Product List</li>
+        <li>Productos</li>
+        <li class="active">Lista de Productos</li>
       </ol>
     </section>
 
@@ -60,9 +60,9 @@
               <div class="pull-right">
                 <form class="form-inline">
                   <div class="form-group">
-                    <label>Category: </label>
+                    <label>Categoría: </label>
                     <select class="form-control input-sm" id="select_category">
-                      <option value="0">ALL</option>
+                      <option value="0">TODOS</option>
                       <?php
                         $conn = $pdo->open();
 
@@ -86,12 +86,12 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Name</th>
-                  <th>Photo</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Views Today</th>
-                  <th>Tools</th>
+                  <th>Nombre</th>
+                  <th>Foto</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Vistas Hoy</th>
+                  <th>Herramientas</th>
                 </thead>
                 <tbody>
                   <?php

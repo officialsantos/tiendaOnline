@@ -22,9 +22,9 @@
 				$output .= '
 					<div class="alert alert-danger">
 		                <h4><i class="icon fa fa-warning"></i> Error!</h4>
-		                Account already activated.
+		                Cuenta activada correctamente.
 		            </div>
-		            <h4>You may <a href="login.php">Login</a> or back to <a href="index.php">Homepage</a>.</h4>
+		            <h4>Debes <a href="login.php">Iniciar Sesión</a> o volver a <a href="index.php">Home</a>.</h4>
 				';
 			}
 			else{
@@ -34,9 +34,9 @@
 					$output .= '
 						<div class="alert alert-success">
 			                <h4><i class="icon fa fa-check"></i> Success!</h4>
-			                Account activated - Email: <b>'.$row['email'].'</b>.
+			                Cuenta activada - Email: <b>'.$row['email'].'</b>.
 			            </div>
-			            <h4>You may <a href="login.php">Login</a> or back to <a href="index.php">Homepage</a>.</h4>
+			            <h4>Debes <a href="login.php">Iniciar Sesión</a> o volver a <a href="index.php">Home</a>.</h4>
 					';
 				}
 				catch(PDOException $e){

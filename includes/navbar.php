@@ -12,10 +12,10 @@
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="index.php">HOME</a></li>
-          <li><a href="">ABOUT US</a></li>
-          <li><a href="">CONTACT US</a></li>
+          <!--<li><a href="">ABOUT US</a></li>-->
+          <!--<li><a href="">CONTACT US</a></li>-->
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CATEGORY <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CATEGORÍA <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <?php
              
@@ -41,7 +41,7 @@
         </ul>
         <form method="POST" class="navbar-form navbar-left" action="search.php">
           <div class="input-group">
-              <input type="text" class="form-control" id="navbar-search-input" name="keyword" placeholder="Search for Product" required>
+              <input type="text" class="form-control" id="navbar-search-input" name="keyword" placeholder="Buscar producto..." required>
               <span class="input-group-btn" id="searchBtn" style="display:none;">
                   <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-search"></i> </button>
               </span>
@@ -59,12 +59,12 @@
               <span class="label label-success cart_count"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have <span class="cart_count"></span> item(s) in cart</li>
+              <li class="header">Tienes <span class="cart_count"></span> item(s) en el carrito</li>
               <li>
                 <ul class="menu" id="cart_menu">
                 </ul>
               </li>
-              <li class="footer"><a href="cart_view.php">Go to Cart</a></li>
+              <li class="footer"><a href="cart_view.php">Ir al Carrito</a></li>
             </ul>
           </li>
           <?php
@@ -88,10 +88,10 @@
                     </li>
                     <li class="user-footer">
                       <div class="pull-left">
-                        <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                        <a href="profile.php" class="btn btn-default btn-flat">Perfil</a>
                       </div>
                       <div class="pull-right">
-                        <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                        <a href="logout.php" class="btn btn-default btn-flat">Desconectarse</a>
                       </div>
                     </li>
                   </ul>
@@ -100,8 +100,8 @@
             }
             else{
               echo "
-                <li><a href='login.php'>LOGIN</a></li>
-                <li><a href='signup.php'>SIGNUP</a></li>
+                <li><a href='login.php'>INICIAR SESIÓN</a></li>
+                <li><a href='signup.php'>REGISTRARSE</a></li>
               ";
             }
           ?>
