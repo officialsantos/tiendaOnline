@@ -30,8 +30,8 @@
   	<!-- Google Font -->
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <!-- Paypal Express -->
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <!-- Paypal Express (se reemplazao el viejo)-->
+    <script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID&currency=USD"></script>
     <!-- Google Recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
 

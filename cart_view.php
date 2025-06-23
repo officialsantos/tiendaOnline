@@ -156,44 +156,25 @@ function getTotal(){
 </script>
 <!-- Paypal Express -->
 <script>
-paypal.Button.render({
-    env: 'sandbox', // change for production if app is live,
-
-	client: {
-        sandbox:    'AEfYxns5l1tnCle5stC4-vpS0mg4ABwESySCOSq9CsW7wff3Ehr5LeGA',
-        //production: 'AaBHKJFEej4V6yaArjzSx9cuf-UYesQYKqynQVCdBlKuZKawDDzFyuQdidPOBSGEhWaNQnnvfzuFB9SM'
-    },
-
-    commit: true, // Show a 'Pay Now' button
-
-    style: {
-    	color: 'gold',
-    	size: 'small'
-    },
-
-    payment: function(data, actions) {
-        return actions.payment.create({
-            payment: {
-                transactions: [
-                    {
-                    	//total purchase
-                        amount: { 
-                        	total: total, 
-                        	currency: 'USD' 
-                        }
-                    }
-                ]
-            }
+paypal.Buttons({
+    createOrder: function(data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: total.toString(), // total ya está en la variable JS
+                    currency_code: 'USD'
+                }
+            }]
         });
     },
-
-    onAuthorize: function(data, actions) {
-        return actions.payment.execute().then(function(payment) {
-			window.location = 'sales.php?pay='+payment.id;
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+            // Redirige después del pago
+            window.location = 'sales.php?pay=' + data.orderID;
         });
-    },
-
-}, '#paypal-button');
+    }
+}).render('#paypal-button');
 </script>
+
 </body>
 </html>
