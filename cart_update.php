@@ -12,7 +12,7 @@
 		try{
 			$stmt = $conn->prepare("UPDATE cart SET quantity=:quantity WHERE id=:id");
 			$stmt->execute(['quantity'=>$qty, 'id'=>$id]);
-			$output['message'] = 'Updated';
+			$output['message'] = 'Actualizado';
 		}
 		catch(PDOException $e){
 			$output['message'] = $e->getMessage();
@@ -22,7 +22,7 @@
 		foreach($_SESSION['cart'] as $key => $row){
 			if($row['productid'] == $id){
 				$_SESSION['cart'][$key]['quantity'] = $qty;
-				$output['message'] = 'Updated';
+				$output['message'] = 'Actualizado';
 			}
 		}
 	}

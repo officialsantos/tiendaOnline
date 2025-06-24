@@ -57,6 +57,7 @@
 		            	<div class="col-sm-6">
 		            		<img src="<?php echo (!empty($product['photo'])) ? 'images/'.$product['photo'] : 'images/noimage.jpg'; ?>" width="100%" class="zoom" data-magnify-src="images/large-<?php echo $product['photo']; ?>">
 		            		<br><br>
+							<p style="font-weight:bold; font-size:20px;">Cantidad de personas</p>
 		            		<form class="form-inline" id="productForm">
 		            			<div class="form-group">
 			            			<div class="input-group col-sm-5">

@@ -21,7 +21,7 @@
 		        				<th>Foto</th>
 		        				<th>Nombre</th>
 		        				<th>Precio</th>
-		        				<th width="20%">Cantidad</th>
+		        				<th width="20%">Personas</th>
 		        				<th>Subtotal</th>
 		        			</thead>
 		        			<tbody id="tbody">
