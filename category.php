@@ -46,8 +46,8 @@
 	       						echo "
 	       							<div class='col-sm-4'>
 	       								<div class='box box-solid'>
-		       								<div class='box-body prod-body'>
-		       									<img src='".$image."' width='100%' height='230px' class='thumbnail'>
+		       								<div class='box-body'>
+		       									<!-- IMAGENES DESHABILITADAS / <img src='".$image."' width='100%' height='230px' class='thumbnail'>-->
 		       									<h5><a href='product.php?product=".$row['slug']."'>".$row['name']."</a></h5>
 		       								</div>
 		       								<div class='box-footer'>
@@ -55,7 +55,9 @@
 		       								</div>
 	       								</div>
 	       							</div>
-	       						";
+	       						"; 
+								// 'box-body prod-body' para agrandar las cajas
+								// quitar el comentario en <img> para habilitar las imagenes
 	       						if($inc == 3) echo "</div>";
 						    }
 						    if($inc == 1) echo "<div class='col-sm-4'></div><div class='col-sm-4'></div></div>"; 
