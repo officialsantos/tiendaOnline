@@ -12,7 +12,7 @@
 	      <section class="content">
 	        <div class="row">
 	        	<div class="col-sm-9">
-	        		<h1 class="page-header">SU CARRITO</h1>
+	        		<h1 class="page-header">TU CARRITO</h1>
 	        		<div class="box box-solid">
 	        			<div class="box-body">
 		        		<table class="table table-bordered">
