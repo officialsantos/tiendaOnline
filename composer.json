@@ -1,0 +1,18 @@
+{
+    "name": "user/olimpiadas",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "User\\Olimpiadas\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "officialsantos",
+            "email": "sanchu-78@hotmail.com"
+        }
+    ]
+}

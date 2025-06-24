@@ -65,9 +65,8 @@
 						<h2>Gracias por registrarte</h2>
 						<p>Tu Cuenta:</p>
 						<p>Email: ".$email."</p>
-						<p>Contraseña: ".$_POST['password']."</p>
 						<p>Por favor, cliquee en el enlace para activar su cuenta.</p>
-						<a href='http://localhost/ecommerce/activate.php?code=".$code."&user=".$userid."'>Activar Cuenta</a>
+						<a href='http://localhost/olimpiadas/activate.php?code=".$code."&user=".$userid."'>Activar Cuenta</a>
 					";
 
 					//Load phpmailer
@@ -79,8 +78,8 @@
 				        $mail->isSMTP();                                     
 				        $mail->Host = 'smtp.gmail.com';                      
 				        $mail->SMTPAuth = true;                               
-				        $mail->Username = '';     
-				        $mail->Password = '';                    
+				        $mail->Username = 'sanchuap@gmail.com';     
+				        $mail->Password = 'vksqwjxzbikzbfqo';                    
 				        $mail->SMTPOptions = array(
 				            'ssl' => array(
 				            'verify_peer' => false,
@@ -88,14 +87,14 @@
 				            'allow_self_signed' => true
 				            )
 				        );                         
-				        $mail->SMTPSecure = 'ssl';                           
-				        $mail->Port = 465;                                   
+				        $mail->SMTPSecure = 'tls';                           
+				        $mail->Port = 587;                                   
 
-				        $mail->setFrom('testsourcecodester@gmail.com');
+				        $mail->setFrom('sanchuap@gmail.com');
 				        
 				        //Recipients
 				        $mail->addAddress($email);              
-				        $mail->addReplyTo('testsourcecodester@gmail.com');
+				        $mail->addReplyTo('sanchuap@gmail.com');
 				       
 				        //Content
 				        $mail->isHTML(true);                                  

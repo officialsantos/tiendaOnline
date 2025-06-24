@@ -70,7 +70,7 @@
           <hr>
       		<div class="row">
     			<div class="col-xs-4">
-          			<button type="submit" class="btn btn-primary btn-block btn-flat" name="signup"><i class="fa fa-pencil"></i> Registrarse</button>
+          			<button type="submit" class="btn btn-primary btn-block btn-flat" name="signup"><i class="fa fa-pencil"></i> Registrar</button>
         		</div>
       		</div>
     	</form>
