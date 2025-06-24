@@ -16,13 +16,13 @@
         ";
         unset($_SESSION['error']);
       }
-      if(isset($_SESSION['exitoso'])){
+      if(isset($_SESSION['success'])){
         echo "
           <div class='callout callout-success text-center'>
-            <p>".$_SESSION['exitoso']."</p> 
+            <p>".$_SESSION['success']."</p> 
           </div>
         ";
-        unset($_SESSION['exitoso']);
+        unset($_SESSION['success']);
       }
     ?>
   	<div class="login-box-body">
