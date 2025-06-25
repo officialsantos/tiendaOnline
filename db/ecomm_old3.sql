@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2025 a las 15:58:11
+-- Tiempo de generación: 25-06-2025 a las 12:44:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,7 +39,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`) VALUES
-(7, 9, 1, 1);
+(7, 9, 1, 1),
+(14, 28, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -89,8 +90,7 @@ INSERT INTO `details` (`id`, `sales_id`, `product_id`, `quantity`) VALUES
 (20, 10, 19, 5),
 (21, 11, 1, 1),
 (22, 12, 9, 1),
-(23, 13, 10, 1),
-(24, 14, 4, 1);
+(23, 13, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -115,12 +115,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `slug`, `price`, `photo`, `date_view`, `counter`) VALUES
-(1, 1, 'Aventura en la Patagonia', '<p><strong>Programa individual a Patagonia Austral</strong>, diseñado para pasajeros que viajan de forma autónoma y desean una experiencia personalizada en contacto con la naturaleza.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> traslados in/out aeropuerto-hotel, alojamiento en establecimiento de categoría turista con desayuno</li>\r\n  <li><strong>Excursiones:</strong> Navegación regular por Lago Argentino con visita al Glaciar Upsala y trekking en El Chaltén (servicio compartido)</li>\r\n  <li><strong>Asistencia al viajero</strong> durante toda la estadía</li>\r\n</ul>', 'aventura-patagonia', 850, 'blank.png', '2025-06-25', 4),
-(2, 1, 'Descanso en Termas de Río Hondo', '<p><strong>Programa termal de bienestar y relax</strong>, ideal para el cuidado físico y mental, orientado a pasajeros que buscan descanso activo y servicios terapéuticos.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 3 días / 2 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel termal con acceso ilimitado a piscinas mineromedicinales</li>\r\n  <li><strong>Régimen de comidas:</strong> media pensión (desayuno buffet + cena menú fijo)</li>\r\n  <li><strong>Servicios complementarios:</strong> uso de gimnasio, circuito hídrico y actividades de relajación</li>\r\n</ul>', 'termas-rio-hondo', 420, 'blank.png', '2025-06-25', 2),
-(3, 2, 'Diversión en Bariloche', '<p><strong>Paquete familiar nieve y naturaleza</strong> diseñado para grupos familiares con menores, combinando recreación, naturaleza y confort en un entorno seguro.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en complejo familiar con habitaciones cuádruples, traslados regulares y asistencia local</li>\r\n  <li><strong>Excursiones:</strong> actividades guiadas en centros de nieve (trineo, caminatas, mini esquí para niños)</li>\r\n  <li><strong>Régimen de comidas:</strong> desayuno buffet incluido</li>\r\n</ul>', 'bariloche-familia', 1200, 'blank.png', '2025-06-25', 12),
-(4, 2, 'Aventura en Cataratas', '<p><strong>Programa Iguazú en familia</strong>, enfocado en la interpretación ambiental y el turismo de naturaleza con servicios adaptados a familias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel con infraestructura para niños, traslados aeropuerto-hotel-aeropuerto</li>\r\n  <li><strong>Excursiones:</strong> circuito regular a Cataratas lado argentino con guía especializado y Tren de la Selva</li>\r\n  <li><strong>Régimen:</strong> pensión completa (desayuno, almuerzo, cena)</li>\r\n</ul>', 'cataratas-familia', 1400, 'blank.png', '2025-06-25', 3),
-(5, 3, 'Escape a Mendoza con Amigos', '<p><strong>Tour grupal enogastronómico a Mendoza</strong>, ideal para grupos de afinidad o turismo corporativo, enfocado en la cultura del vino y el turismo de experiencias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> traslados grupales, alojamiento en base doble/múltiple en hostería turística</li>\r\n  <li><strong>Actividades:</strong> visitas a bodegas con cata dirigida, city tour en circuito regular y jornada libre para actividades opcionales</li>\r\n  <li><strong>Coordinador permanente</strong> y cobertura de asistencia al viajero</li>\r\n</ul>', 'mendoza-grupo', 980, 'blank.png', '2025-06-25', 3),
-(6, 3, 'Tour Norte Argentino', '<p><strong>Circuito norte andino para grupos reducidos</strong>, con foco en el patrimonio cultural, paisajístico y gastronómico de las provincias de Salta y Jujuy.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hosterías con desayuno, traslados internos y excursiones en combi privada</li>\r\n  <li><strong>Itinerario:</strong> Salta capital, Cafayate, Cachi, Purmamarca y Quebrada de Humahuaca</li>\r\n  <li><strong>Servicios:</strong> guía regional, seguro médico y coordinación en destino</li>\r\n</ul>', 'norte-argentino-grupo', 1100, 'blank.png', '2025-06-25', 4);
+(1, 1, 'Aventura en la Patagonia', '<p><strong>Programa individual a Patagonia Austral</strong>, diseñado para pasajeros que viajan de forma autónoma y desean una experiencia personalizada en contacto con la naturaleza.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> traslados in/out aeropuerto-hotel, alojamiento en establecimiento de categoría turista con desayuno</li>\r\n  <li><strong>Excursiones:</strong> Navegación regular por Lago Argentino con visita al Glaciar Upsala y trekking en El Chaltén (servicio compartido)</li>\r\n  <li><strong>Asistencia al viajero</strong> durante toda la estadía</li>\r\n</ul>', 'aventura-patagonia', 850, 'blank.png', '2025-06-24', 4),
+(2, 1, 'Descanso en Termas de Río Hondo', '<p><strong>Programa termal de bienestar y relax</strong>, ideal para el cuidado físico y mental, orientado a pasajeros que buscan descanso activo y servicios terapéuticos.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 3 días / 2 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel termal con acceso ilimitado a piscinas mineromedicinales</li>\r\n  <li><strong>Régimen de comidas:</strong> media pensión (desayuno buffet + cena menú fijo)</li>\r\n  <li><strong>Servicios complementarios:</strong> uso de gimnasio, circuito hídrico y actividades de relajación</li>\r\n</ul>', 'termas-rio-hondo', 420, 'blank.png', '2025-06-24', 0),
+(3, 2, 'Diversión en Bariloche', '<p><strong>Paquete familiar nieve y naturaleza</strong> diseñado para grupos familiares con menores, combinando recreación, naturaleza y confort en un entorno seguro.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en complejo familiar con habitaciones cuádruples, traslados regulares y asistencia local</li>\r\n  <li><strong>Excursiones:</strong> actividades guiadas en centros de nieve (trineo, caminatas, mini esquí para niños)</li>\r\n  <li><strong>Régimen de comidas:</strong> desayuno buffet incluido</li>\r\n</ul>', 'bariloche-familia', 1200, 'blank.png', '2025-06-24', 1),
+(4, 2, 'Aventura en Cataratas', '<p><strong>Programa Iguazú en familia</strong>, enfocado en la interpretación ambiental y el turismo de naturaleza con servicios adaptados a familias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel con infraestructura para niños, traslados aeropuerto-hotel-aeropuerto</li>\r\n  <li><strong>Excursiones:</strong> circuito regular a Cataratas lado argentino con guía especializado y Tren de la Selva</li>\r\n  <li><strong>Régimen:</strong> pensión completa (desayuno, almuerzo, cena)</li>\r\n</ul>', 'cataratas-familia', 1400, 'blank.png', '2025-06-24', 5),
+(5, 3, 'Escape a Mendoza con Amigos', '<p><strong>Tour grupal enogastronómico a Mendoza</strong>, ideal para grupos de afinidad o turismo corporativo, enfocado en la cultura del vino y el turismo de experiencias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> traslados grupales, alojamiento en base doble/múltiple en hostería turística</li>\r\n  <li><strong>Actividades:</strong> visitas a bodegas con cata dirigida, city tour en circuito regular y jornada libre para actividades opcionales</li>\r\n  <li><strong>Coordinador permanente</strong> y cobertura de asistencia al viajero</li>\r\n</ul>', 'mendoza-grupo', 980, 'blank.png', '2025-06-24', 6),
+(6, 3, 'Tour Norte Argentino', '<p><strong>Circuito norte andino para grupos reducidos</strong>, con foco en el patrimonio cultural, paisajístico y gastronómico de las provincias de Salta y Jujuy.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hosterías con desayuno, traslados internos y excursiones en combi privada</li>\r\n  <li><strong>Itinerario:</strong> Salta capital, Cafayate, Cachi, Purmamarca y Quebrada de Humahuaca</li>\r\n  <li><strong>Servicios:</strong> guía regional, seguro médico y coordinación en destino</li>\r\n</ul>', 'norte-argentino-grupo', 1100, 'blank.png', '2025-06-24', 1);
 
 -- --------------------------------------------------------
 
@@ -144,8 +144,7 @@ INSERT INTO `sales` (`id`, `user_id`, `pay_id`, `sales_date`) VALUES
 (10, 9, 'PAY-21700797GV667562HLLZ7ZVY', '2018-05-10'),
 (11, 28, '4LY31586LC540194A', '2025-06-24'),
 (12, 28, '2DC48247H02518136', '2025-06-24'),
-(13, 28, '8VK41743H69735216', '2025-06-24'),
-(14, 28, '5DW873854A883971H', '2025-06-25');
+(13, 28, '8VK41743H69735216', '2025-06-24');
 
 -- --------------------------------------------------------
 
@@ -179,8 +178,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`,
 (11, 'test@gmail.com', '$2y$10$dvV7onY2bPSb9GBENwR57OixbBy3veerLtRt/FqnpoeyzV1h8x48K', 0, 'test', 'test', 'test', 'test', '', 1, '', '', '2018-05-11'),
 (15, 'test2@gmail.com', '$2y$10$38kNj6H42FBtwHXuoA2EnesKLEYUFc4sduX0j0P4sspKteGFSIz/.', 0, 'test2', 'test2', 'test2', 'test2', '', 1, '', '', '2025-06-23'),
 (16, 'test3@gmail.com', '$2y$10$/FtZUx/kCSooIbDI9RVTjODqtavlvMQnu8NpWRZxT.YwHsNpSt6dm', 0, 'test3', 'test3', '', '', '', 1, '', '', '2025-06-23'),
-(28, 'sanchuap@gmail.com', '$2y$10$TLTskFMZ.05Qak7UYg/gAecubS.BoFNnl51ppPYMr5g.5m5Wvbwhu', 0, 'asd', 'asd', '', '', '', 1, 'UWoOr2RI8tZN', '', '2025-06-24'),
-(29, 'benjaminnahuelepul@gmail.com', '$2y$10$rT1sAqTlYVBh9jz5FfJNY.qfP/DrGQWdT8Myvq87NnR98lM09pTJG', 0, 'benjita', 'epul', '', '', '', 1, 'Le4KCrDfEzWx', '', '2025-06-25');
+(28, 'sanchuap@gmail.com', '$2y$10$TLTskFMZ.05Qak7UYg/gAecubS.BoFNnl51ppPYMr5g.5m5Wvbwhu', 0, 'asd', 'asd', '', '', '', 1, 'UWoOr2RI8tZN', '', '2025-06-24');
 
 --
 -- Índices para tablas volcadas
@@ -230,7 +228,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
@@ -242,7 +240,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de la tabla `details`
 --
 ALTER TABLE `details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -254,13 +252,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
