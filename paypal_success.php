@@ -20,7 +20,7 @@ $user_id = $_SESSION['user'];
 $conn = $pdo->open();
 
 try {
-    // Obtener datos de reservación
+    // Obtener datos de reservación (sin intentar obtener precio acá, eso se hace desde productos)
     $stmt = $conn->prepare("SELECT * FROM reservations WHERE id=:id AND user_id=:user_id");
     $stmt->execute(['id' => $reservation_id, 'user_id' => $user_id]);
     $reservation = $stmt->fetch();
@@ -31,19 +31,27 @@ try {
         exit();
     }
 
-    // Obtener precio del producto
-    $stmt = $conn->prepare("SELECT * FROM products WHERE id = :product_id");
+    // Obtener precio y datos del producto relacionado
+    $stmt = $conn->prepare("SELECT price FROM products WHERE id = :product_id");
     $stmt->execute(['product_id' => $reservation['product_id']]);
     $product = $stmt->fetch();
 
-    $amount = $product['price'] * $reservation['quantity'];
+    if (!$product) {
+        $_SESSION['error'] = 'Producto no encontrado.';
+        header('Location: profile.php');
+        exit();
+    }
+
+    // Calcular monto total (cantidad * precio * duración días si existe)
+    $duration_days = isset($reservation['duration_days']) && $reservation['duration_days'] > 0 ? $reservation['duration_days'] : 1;
+    $amount = $product['price'] * $reservation['quantity'] * $duration_days;
 
     // Insertar en tabla sales
     $stmt = $conn->prepare("INSERT INTO sales (user_id, pay_id, sales_date) VALUES (:user_id, :pay_id, NOW())");
     $stmt->execute(['user_id' => $user_id, 'pay_id' => $order_id]);
     $sales_id = $conn->lastInsertId();
 
-    // Insertar en tabla details
+    // Insertar en tabla details con el precio correcto
     $stmt = $conn->prepare("INSERT INTO details (sales_id, product_id, price, quantity) VALUES (:sales_id, :product_id, :price, :quantity)");
     $stmt->execute([
         'sales_id' => $sales_id,
@@ -52,8 +60,8 @@ try {
         'quantity' => $reservation['quantity']
     ]);
 
-    // Cambiar estado de reservación
-    $stmt = $conn->prepare("UPDATE reservations SET status='completed' WHERE id=:id");
+    // Actualizar estado de reservación a completed o paid
+    $stmt = $conn->prepare("UPDATE reservations SET status='paid' WHERE id=:id");
     $stmt->execute(['id' => $reservation_id]);
 
     $_SESSION['success'] = 'Pago realizado correctamente. Reservación confirmada.';

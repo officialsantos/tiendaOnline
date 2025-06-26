@@ -15,14 +15,14 @@ if (!isset($_GET['id'])) {
 }
 
 $reservation_id = $_GET['id'];
-$user_id = $_SESSION['user']; // ✅ Sesión guarda solo el ID
+$user_id = $_SESSION['user'];
 
 $conn = $pdo->open();
 
 try {
-    // Obtener la reservación con el precio del producto
+    // Consulta mejorada: traemos solo el nombre del producto, precio lo tomamos de la reserva
     $stmt = $conn->prepare("
-        SELECT r.*, p.name AS product_name, p.price 
+        SELECT r.*, p.name AS product_name
         FROM reservations r 
         JOIN products p ON r.product_id = p.id 
         WHERE r.id = :id AND r.user_id = :user_id
@@ -42,7 +42,10 @@ try {
         exit();
     }
 
-    $total = $reservation['price'] * $reservation['quantity'];
+    $duration_days = isset($reservation['duration_days']) && $reservation['duration_days'] > 0 ? $reservation['duration_days'] : 1;
+
+    // Usamos el precio guardado en la reserva, no el de products
+    $total = $reservation['price'] * $reservation['quantity'] * $duration_days;
     $product_name = $reservation['product_name'];
 
 } catch (PDOException $e) {
@@ -70,6 +73,7 @@ $pdo->close();
         <div class="box-body">
           <p><strong>Producto:</strong> <?php echo htmlspecialchars($product_name); ?></p>
           <p><strong>Cantidad:</strong> <?php echo (int)$reservation['quantity']; ?></p>
+          <p><strong>Duración (días):</strong> <?php echo $duration_days; ?></p>
           <p><strong>Total a pagar:</strong> $<?php echo number_format($total, 2); ?></p>
 
           <!-- Contenedor PayPal -->
@@ -84,7 +88,7 @@ $pdo->close();
                   purchase_units: [{
                     description: "Pago de reservación: <?= htmlspecialchars($product_name) ?>",
                     amount: {
-                      value: '<?= number_format($total, 2, '.', '') ?>'
+                      value: '<?= number_format($total, 2, ".", "") ?>'
                     }
                   }]
                 });

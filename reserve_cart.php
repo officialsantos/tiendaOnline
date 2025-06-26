@@ -26,14 +26,25 @@ try {
         exit();
     }
 
-    // Insertar cada ítem en la tabla de reservaciones
-    $stmt_insert = $conn->prepare("INSERT INTO reservations (user_id, product_id, quantity, reserved_at, status, expire_at) VALUES (:user_id, :product_id, :quantity, NOW(), 'pending', DATE_ADD(NOW(), INTERVAL 2 DAY))");
+    // Preparar inserción en reservaciones incluyendo precio y duración de días
+    $stmt_insert = $conn->prepare("INSERT INTO reservations (user_id, product_id, quantity, price, duration_days, reserved_at, status, expire_at) VALUES (:user_id, :product_id, :quantity, :price, :duration_days, NOW(), 'pending', DATE_ADD(NOW(), INTERVAL 2 DAY))");
 
     foreach ($cart_items as $item) {
+        $duration_days = isset($item['days']) ? $item['days'] : 1; // Por defecto 1 día
+
+        // Obtener precio actual del producto
+        $stmt_price = $conn->prepare("SELECT price FROM products WHERE id = :product_id");
+        $stmt_price->execute(['product_id' => $item['product_id']]);
+        $product = $stmt_price->fetch();
+
+        $price = $product ? $product['price'] : 0;
+
         $stmt_insert->execute([
             'user_id' => $user_id,
             'product_id' => $item['product_id'],
-            'quantity' => $item['quantity']
+            'quantity' => $item['quantity'],
+            'price' => $price,
+            'duration_days' => $duration_days
         ]);
     }
 
