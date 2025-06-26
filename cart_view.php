@@ -30,10 +30,15 @@
 	        			</div>
 	        		</div>
 	        		<?php
-	        			if(isset($_SESSION['user'])){
-	        				echo "
-	        					<div id='paypal-button'></div>
-	        				";
+	if(isset($_SESSION['user'])){
+		echo "
+			<div id='paypal-button'></div>
+			<br>
+			<form method='POST' action='reserve_cart.php'>
+				<button type='submit' class='btn btn-warning btn-lg btn-block'>Reservar Paquetes</button>
+			</form>
+		";
+
 	        			}
 	        			else{
 	        				echo "
