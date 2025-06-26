@@ -47,11 +47,11 @@
 				$output .= "
 					<tr>
 						<td><button type='button' data-id='".$row['cartid']."' class='btn btn-danger btn-flat cart_delete'><i class='fa fa-remove'></i></button></td>
-						<td><img src='".$image."' width='30px' height='30px'></td>
 						<td>".$row['name']."</td>
 						<td>&#36; ".number_format($row['price'], 2)."</td>
 
-						<td class='input-group'>
+						<td>
+						<div class='input-group'>
 							<span class='input-group-btn'>
 								<button type='button' id='minus' class='btn btn-default btn-flat minus' data-id='".$row['cartid']."'><i class='fa fa-minus'></i></button>
 							</span>
@@ -59,9 +59,11 @@
 							<span class='input-group-btn'>
 								<button type='button' id='add' class='btn btn-default btn-flat add' data-id='".$row['cartid']."'><i class='fa fa-plus'></i></button>
 							</span>
+						</div>
 						</td>
 
-						<td class='input-group'>
+						<td>
+						<div class='input-group'>
 							<span class='input-group-btn'>
 								<button type='button' id='minus-days' class='btn btn-default btn-flat minus-days' data-id='".$row['cartid']."'><i class='fa fa-minus'></i></button>
 							</span>
@@ -69,6 +71,7 @@
 							<span class='input-group-btn'>
 								<button type='button' id='add-days' class='btn btn-default btn-flat add-days' data-id='".$row['cartid']."'><i class='fa fa-plus'></i></button>
 							</span>
+						</div>
 						</td>
 
 						<td>&#36; ".number_format($subtotal, 2)."</td>
