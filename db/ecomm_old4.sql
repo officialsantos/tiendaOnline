@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2025 a las 23:04:41
+-- Tiempo de generación: 25-06-2025 a las 15:58:11
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -115,45 +115,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `slug`, `price`, `photo`, `date_view`, `counter`) VALUES
-(1, 1, 'Aventura en la Patagonia', '<p><strong>Programa individual a Patagonia Austral</strong>, diseñado para pasajeros que viajan de forma autónoma y desean una experiencia personalizada en contacto con la naturaleza.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> traslados in/out aeropuerto-hotel, alojamiento en establecimiento de categoría turista con desayuno</li>\r\n  <li><strong>Excursiones:</strong> Navegación regular por Lago Argentino con visita al Glaciar Upsala y trekking en El Chaltén (servicio compartido)</li>\r\n  <li><strong>Asistencia al viajero</strong> durante toda la estadía</li>\r\n</ul>', 'aventura-patagonia', 850, 'blank.png', '2025-06-28', 2),
-(2, 1, 'Descanso en Termas de Río Hondo', '<p><strong>Programa termal de bienestar y relax</strong>, ideal para el cuidado físico y mental, orientado a pasajeros que buscan descanso activo y servicios terapéuticos.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 3 días / 2 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel termal con acceso ilimitado a piscinas mineromedicinales</li>\r\n  <li><strong>Régimen de comidas:</strong> media pensión (desayuno buffet + cena menú fijo)</li>\r\n  <li><strong>Servicios complementarios:</strong> uso de gimnasio, circuito hídrico y actividades de relajación</li>\r\n</ul>', 'termas-rio-hondo', 420, 'blank.png', '2025-06-28', 1),
-(3, 2, 'Diversión en Bariloche', '<p><strong>Paquete familiar nieve y naturaleza</strong> diseñado para grupos familiares con menores, combinando recreación, naturaleza y confort en un entorno seguro.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en complejo familiar con habitaciones cuádruples, traslados regulares y asistencia local</li>\r\n  <li><strong>Excursiones:</strong> actividades guiadas en centros de nieve (trineo, caminatas, mini esquí para niños)</li>\r\n  <li><strong>Régimen de comidas:</strong> desayuno buffet incluido</li>\r\n</ul>', 'bariloche-familia', 1200, 'blank.png', '2025-06-28', 5),
+(1, 1, 'Aventura en la Patagonia', '<p><strong>Programa individual a Patagonia Austral</strong>, diseñado para pasajeros que viajan de forma autónoma y desean una experiencia personalizada en contacto con la naturaleza.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> traslados in/out aeropuerto-hotel, alojamiento en establecimiento de categoría turista con desayuno</li>\r\n  <li><strong>Excursiones:</strong> Navegación regular por Lago Argentino con visita al Glaciar Upsala y trekking en El Chaltén (servicio compartido)</li>\r\n  <li><strong>Asistencia al viajero</strong> durante toda la estadía</li>\r\n</ul>', 'aventura-patagonia', 850, 'blank.png', '2025-06-25', 4),
+(2, 1, 'Descanso en Termas de Río Hondo', '<p><strong>Programa termal de bienestar y relax</strong>, ideal para el cuidado físico y mental, orientado a pasajeros que buscan descanso activo y servicios terapéuticos.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 3 días / 2 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel termal con acceso ilimitado a piscinas mineromedicinales</li>\r\n  <li><strong>Régimen de comidas:</strong> media pensión (desayuno buffet + cena menú fijo)</li>\r\n  <li><strong>Servicios complementarios:</strong> uso de gimnasio, circuito hídrico y actividades de relajación</li>\r\n</ul>', 'termas-rio-hondo', 420, 'blank.png', '2025-06-25', 2),
+(3, 2, 'Diversión en Bariloche', '<p><strong>Paquete familiar nieve y naturaleza</strong> diseñado para grupos familiares con menores, combinando recreación, naturaleza y confort en un entorno seguro.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en complejo familiar con habitaciones cuádruples, traslados regulares y asistencia local</li>\r\n  <li><strong>Excursiones:</strong> actividades guiadas en centros de nieve (trineo, caminatas, mini esquí para niños)</li>\r\n  <li><strong>Régimen de comidas:</strong> desayuno buffet incluido</li>\r\n</ul>', 'bariloche-familia', 1200, 'blank.png', '2025-06-25', 12),
 (4, 2, 'Aventura en Cataratas', '<p><strong>Programa Iguazú en familia</strong>, enfocado en la interpretación ambiental y el turismo de naturaleza con servicios adaptados a familias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel con infraestructura para niños, traslados aeropuerto-hotel-aeropuerto</li>\r\n  <li><strong>Excursiones:</strong> circuito regular a Cataratas lado argentino con guía especializado y Tren de la Selva</li>\r\n  <li><strong>Régimen:</strong> pensión completa (desayuno, almuerzo, cena)</li>\r\n</ul>', 'cataratas-familia', 1400, 'blank.png', '2025-06-25', 3),
-(5, 3, 'Escape a Mendoza con Amigos', '<p><strong>Tour grupal enogastronómico a Mendoza</strong>, ideal para grupos de afinidad o turismo corporativo, enfocado en la cultura del vino y el turismo de experiencias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> traslados grupales, alojamiento en base doble/múltiple en hostería turística</li>\r\n  <li><strong>Actividades:</strong> visitas a bodegas con cata dirigida, city tour en circuito regular y jornada libre para actividades opcionales</li>\r\n  <li><strong>Coordinador permanente</strong> y cobertura de asistencia al viajero</li>\r\n</ul>', 'mendoza-grupo', 980, 'blank.png', '2025-06-25', 4),
-(6, 3, 'Tour Norte Argentino', '<p><strong>Circuito norte andino para grupos reducidos</strong>, con foco en el patrimonio cultural, paisajístico y gastronómico de las provincias de Salta y Jujuy.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hosterías con desayuno, traslados internos y excursiones en combi privada</li>\r\n  <li><strong>Itinerario:</strong> Salta capital, Cafayate, Cachi, Purmamarca y Quebrada de Humahuaca</li>\r\n  <li><strong>Servicios:</strong> guía regional, seguro médico y coordinación en destino</li>\r\n</ul>', 'norte-argentino-grupo', 1100, 'blank.png', '2025-06-25', 5);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reservations`
---
-
-CREATE TABLE `reservations` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1,
-  `duration_days` int(11) DEFAULT 1,
-  `reserved_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(20) NOT NULL DEFAULT 'pending',
-  `expire_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `reservations`
---
-
-INSERT INTO `reservations` (`id`, `user_id`, `product_id`, `quantity`, `duration_days`, `reserved_at`, `status`, `expire_at`) VALUES
-(1, 29, 1, 3, 4, '2025-06-25 12:33:07', 'cancelled', '2025-06-27 12:33:07'),
-(2, 29, 3, 1, 1, '2025-06-25 13:05:16', 'cancelled', '2025-06-27 13:05:16'),
-(3, 29, 6, 1, 1, '2025-06-25 14:14:26', 'cancelled', '2025-06-27 14:14:26'),
-(4, 29, 3, 1, 1, '2025-06-25 14:15:15', 'cancelled', '2025-06-27 14:15:15'),
-(5, 29, 5, 4, 1, '2025-06-25 14:15:15', 'cancelled', '2025-06-27 14:15:15'),
-(6, 29, 1, 1, 1, '2025-06-25 14:15:15', 'cancelled', '2025-06-27 14:15:15'),
-(7, 29, 2, 1, 1, '2025-06-25 14:22:05', 'pending', '2025-06-27 14:22:05'),
-(8, 29, 1, 5, 4, '2025-06-25 15:47:06', 'cancelled', '2025-06-27 15:47:06'),
-(9, 29, 3, 1, 1, '2025-06-28 16:13:53', 'pending', '2025-06-30 16:13:53'),
-(10, 29, 2, 1, 1, '2025-06-28 16:26:39', 'pending', '2025-06-30 16:26:39');
+(5, 3, 'Escape a Mendoza con Amigos', '<p><strong>Tour grupal enogastronómico a Mendoza</strong>, ideal para grupos de afinidad o turismo corporativo, enfocado en la cultura del vino y el turismo de experiencias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> traslados grupales, alojamiento en base doble/múltiple en hostería turística</li>\r\n  <li><strong>Actividades:</strong> visitas a bodegas con cata dirigida, city tour en circuito regular y jornada libre para actividades opcionales</li>\r\n  <li><strong>Coordinador permanente</strong> y cobertura de asistencia al viajero</li>\r\n</ul>', 'mendoza-grupo', 980, 'blank.png', '2025-06-25', 3),
+(6, 3, 'Tour Norte Argentino', '<p><strong>Circuito norte andino para grupos reducidos</strong>, con foco en el patrimonio cultural, paisajístico y gastronómico de las provincias de Salta y Jujuy.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hosterías con desayuno, traslados internos y excursiones en combi privada</li>\r\n  <li><strong>Itinerario:</strong> Salta capital, Cafayate, Cachi, Purmamarca y Quebrada de Humahuaca</li>\r\n  <li><strong>Servicios:</strong> guía regional, seguro médico y coordinación en destino</li>\r\n</ul>', 'norte-argentino-grupo', 1100, 'blank.png', '2025-06-25', 4);
 
 -- --------------------------------------------------------
 
@@ -178,8 +145,7 @@ INSERT INTO `sales` (`id`, `user_id`, `pay_id`, `sales_date`) VALUES
 (11, 28, '4LY31586LC540194A', '2025-06-24'),
 (12, 28, '2DC48247H02518136', '2025-06-24'),
 (13, 28, '8VK41743H69735216', '2025-06-24'),
-(14, 28, '5DW873854A883971H', '2025-06-25'),
-(15, 29, '02722484A6163451Y', '2025-06-28');
+(14, 28, '5DW873854A883971H', '2025-06-25');
 
 -- --------------------------------------------------------
 
@@ -214,8 +180,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`,
 (15, 'test2@gmail.com', '$2y$10$38kNj6H42FBtwHXuoA2EnesKLEYUFc4sduX0j0P4sspKteGFSIz/.', 0, 'test2', 'test2', 'test2', 'test2', '', 1, '', '', '2025-06-23'),
 (16, 'test3@gmail.com', '$2y$10$/FtZUx/kCSooIbDI9RVTjODqtavlvMQnu8NpWRZxT.YwHsNpSt6dm', 0, 'test3', 'test3', '', '', '', 1, '', '', '2025-06-23'),
 (28, 'sanchuap@gmail.com', '$2y$10$TLTskFMZ.05Qak7UYg/gAecubS.BoFNnl51ppPYMr5g.5m5Wvbwhu', 0, 'asd', 'asd', '', '', '', 1, 'UWoOr2RI8tZN', '', '2025-06-24'),
-(29, 'benjaminnahuelepul@gmail.com', '$2y$10$rT1sAqTlYVBh9jz5FfJNY.qfP/DrGQWdT8Myvq87NnR98lM09pTJG', 0, 'benjita', 'epul', '', '', '', 1, 'Le4KCrDfEzWx', '', '2025-06-25'),
-(32, 'agustin500cm@gmail.com', '$2y$10$Wx73vnohzXFJ8uwlIG6Yi.c4CRwdphxqeZC.4oDePFFzBI9d977bi', 0, 'Jean', 'Lobos', '', '', '', 0, 'ahDmB6TX3Jz4', '', '2025-06-25');
+(29, 'benjaminnahuelepul@gmail.com', '$2y$10$rT1sAqTlYVBh9jz5FfJNY.qfP/DrGQWdT8Myvq87NnR98lM09pTJG', 0, 'benjita', 'epul', '', '', '', 1, 'Le4KCrDfEzWx', '', '2025-06-25');
 
 --
 -- Índices para tablas volcadas
@@ -246,14 +211,6 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `reservations`
---
-ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `product_id` (`product_id`);
-
---
 -- Indices de la tabla `sales`
 --
 ALTER TABLE `sales`
@@ -273,7 +230,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
@@ -294,33 +251,16 @@ ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `reservations`
---
-ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT de la tabla `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `reservations`
---
-ALTER TABLE `reservations`
-  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
