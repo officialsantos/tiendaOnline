@@ -35,7 +35,7 @@
 						<h2>Gracias por realizar tu compra.</h2>
 						<p>Por seguridad, todos los datos son almacenados en tu perfil, en el Historial de Transacciones.</p>
 						<p>Puede cliquear en el enlace para ver sus datos automáticamente en nuestro sitio web.</p>
-						<a href='http://localhost/olimpiadas/profile.php?sales_id=".$salesid."'>Ver mi compra</a>
+						<a href='https://patagoniaviajes.infinityfreeapp.com/profile.php?sales_id=".$salesid."'>Ver mi compra</a>
 					";
 
 					//Load phpmailer
@@ -67,7 +67,7 @@
 				       
 				        //Content
 				        $mail->isHTML(true);                                  
-				        $mail->Subject = 'PatagoniaViajes - Compra exitosa';
+				        $mail->Subject = 'Gracias por elegir PatagoniaViajes';
 				        $mail->Body    = $message;
 
 				        $mail->send();

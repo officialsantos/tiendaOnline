@@ -23,10 +23,8 @@
 				
 				$message = "
 					<h2>Reinicio de Contraseña</h2>
-					<p>Tu cuenta:</p>
-					<p>Email: ".$email."</p>
 					<p>Por favor, cliquee en el enlace para reestablecer tu contraseña.</p>
-					<a href='http://localhost/ecommerce/password_reset.php?code=".$code."&user=".$row['id']."'>Reiniciar Contraseña</a>
+					<a href='https://patagoniaviajes.infinityfreeapp.com/reset.php?code=".$code."&user=".$row['id']."'>Reiniciar Contraseña</a>
 				";
 
 				//Load phpmailer
@@ -38,8 +36,8 @@
 			        $mail->isSMTP();                                     
 			        $mail->Host = 'smtp.gmail.com';                      
 			        $mail->SMTPAuth = true;                               
-			        $mail->Username = '';     
-			        $mail->Password = '';                    
+			        $mail->Username = 'sanchuap@gmail.com';     
+			        $mail->Password = 'vksqwjxzbikzbfqo';                    
 			        $mail->SMTPOptions = array(
 			            'ssl' => array(
 			            'verify_peer' => false,
@@ -47,18 +45,18 @@
 			            'allow_self_signed' => true
 			            )
 			        );                         
-			        $mail->SMTPSecure = 'ssl';                           
-			        $mail->Port = 465;                                   
+			        $mail->SMTPSecure = 'tls';                           
+			        $mail->Port = 587;                                   
 
-			        $mail->setFrom('testsourcecodester@gmail.com');
+			        $mail->setFrom('sanchuap@gmail.com');
 			        
 			        //Recipients
 			        $mail->addAddress($email);              
-			        $mail->addReplyTo('testsourcecodester@gmail.com');
+			        $mail->addReplyTo('sanchuap@gmail.com');
 			       
 			        //Content
 			        $mail->isHTML(true);                                  
-			        $mail->Subject = 'ECommerce Site Password Reset';
+			        $mail->Subject = 'Recupera tu cuenta de PatagoniaViajes';
 			        $mail->Body    = $message;
 
 			        $mail->send();
