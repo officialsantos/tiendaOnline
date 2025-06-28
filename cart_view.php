@@ -18,12 +18,12 @@
 								<table class="table table-bordered">
 									<thead>
 										<th></th>
-										<th></th>
+										
 
 										<th>Nombre</th>
 										<th>Precio</th>
-										<th width="20%">Personas</th>
-										<th width="20%">Días</th>
+										<th width="18%">Personas</th>
+										<th width="18%">Días</th>
 										<th>Subtotal</th>
 									</thead>
 									<tbody id="tbody">
