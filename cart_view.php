@@ -18,7 +18,7 @@
 								<table class="table table-bordered">
 									<thead>
 										<th></th>
-										
+										<th></th>
 
 										<th>Nombre</th>
 										<th>Precio</th>
