@@ -2,6 +2,7 @@
 <?php
 	if(!isset($_SESSION['user'])){
 		header('location: index.php');
+		exit();
 	}
 ?>
 <?php include 'includes/header.php'; ?>
@@ -51,20 +52,22 @@
 	        							<h4>Miembro desde:</h4>
 	        						</div>
 	        						<div class="col-sm-9">
-	        							<h4><?php echo $user['firstname'].' '.$user['lastname']; ?>
+	        							<h4><?php echo htmlspecialchars($user['firstname'].' '.$user['lastname']); ?>
 	        								<span class="pull-right">
 	        									<a href="#edit" class="btn btn-success btn-flat btn-sm" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
 	        								</span>
 	        							</h4>
-	        							<h4><?php echo $user['email']; ?></h4>
-	        							<h4><?php echo (!empty($user['contact_info'])) ? $user['contact_info'] : 'N/a'; ?></h4>
-	        							<h4><?php echo (!empty($user['address'])) ? $user['address'] : 'N/a'; ?></h4>
+	        							<h4><?php echo htmlspecialchars($user['email']); ?></h4>
+	        							<h4><?php echo (!empty($user['contact_info'])) ? htmlspecialchars($user['contact_info']) : 'N/A'; ?></h4>
+	        							<h4><?php echo (!empty($user['address'])) ? htmlspecialchars($user['address']) : 'N/A'; ?></h4>
 	        							<h4><?php echo date('M d, Y', strtotime($user['created_on'])); ?></h4>
 	        						</div>
 	        					</div>
 	        				</div>
 	        			</div>
 	        		</div>
+
+	        		<!-- Historial de Transacciones -->
 	        		<div class="box box-solid">
 	        			<div class="box-header with-border">
 	        				<h4 class="box-title"><i class="fa fa-calendar"></i> <b>Historial de Transacciones</b></h4>
@@ -97,7 +100,7 @@
 	        									<tr>
 	        										<td class='hidden'></td>
 	        										<td>".date('M d, Y', strtotime($row['sales_date']))."</td>
-	        										<td>".$row['pay_id']."</td>
+	        										<td>".htmlspecialchars($row['pay_id'])."</td>
 	        										<td>&#36; ".number_format($total, 2)."</td>
 	        										<td><button class='btn btn-sm btn-flat btn-info transact' data-id='".$row['id']."'><i class='fa fa-search'></i> Ver</button></td>
 	        									</tr>
@@ -108,6 +111,67 @@
         							catch(PDOException $e){
 										echo "Hubo un problema en la conexión: " . $e->getMessage();
 									}
+
+	        						$pdo->close();
+	        					?>
+	        					</tbody>
+	        				</table>
+	        			</div>
+	        		</div>
+
+	        		<!-- Reservaciones Pendientes -->
+	        		<div class="box box-solid">
+	        			<div class="box-header with-border">
+	        				<h4 class="box-title"><i class="fa fa-calendar-check-o"></i> <b>Reservaciones Pendientes</b></h4>
+	        			</div>
+	        			<div class="box-body">
+	        				<table class="table table-bordered" id="reservations_table">
+	        					<thead>
+	        						<th>Paquete</th>
+	        						<th>Cantidad</th>
+	        						<th>Duración (días)</th>
+	        						<th>Fecha de Reserva</th>
+	        						<th>Estado</th>
+	        						<th>Acciones</th>
+	        					</thead>
+	        					<tbody>
+	        					<?php
+	        						$conn = $pdo->open();
+
+	        						try {
+	        							$stmt = $conn->prepare("SELECT r.id, p.name, r.quantity, r.duration_days, r.reserved_at, r.status FROM reservations r JOIN products p ON r.product_id = p.id WHERE r.user_id=:user_id ORDER BY r.reserved_at DESC");
+	        							$stmt->execute(['user_id'=>$user['id']]);
+	        							foreach($stmt as $res) {
+	        								echo "
+	        									<tr>
+	        										<td>".htmlspecialchars($res['name'])."</td>
+	        										<td>".(int)$res['quantity']."</td>
+	        										<td>".(int)$res['duration_days']."</td>
+	        										<td>".date('d/m/Y', strtotime($res['reserved_at']))."</td>
+	        										<td>".ucfirst($res['status'])."</td>
+	        										<td>
+	        								";
+	        								if($res['status'] == 'pending'){
+	        									echo "
+	        										<a href='edit_reservation.php?id=".$res['id']."' class='btn btn-primary btn-sm'>Modificar</a>
+	        										<form method='POST' action='cancel_reservation.php' style='display:inline-block' onsubmit='return confirm(\"¿Estás seguro de cancelar esta reservación?\");'>
+	        											<input type='hidden' name='reservation_id' value='".$res['id']."'>
+	        											<button type='submit' class='btn btn-danger btn-sm'>Cancelar</button>
+	        										</form>
+													<a href='pay_reservation.php?id=".$res['id']."' class='btn btn-success btn-sm'>Pagar</a>
+	        									";
+	        								} else {
+	        									echo "<em>No disponible</em>";
+	        								}
+	        								echo "
+	        										</td>
+	        									</tr>
+	        								";
+	        							}
+
+	        						} catch(PDOException $e) {
+	        							echo "<tr><td colspan='6'>Error al cargar reservaciones.</td></tr>";
+	        						}
 
 	        						$pdo->close();
 	        					?>
