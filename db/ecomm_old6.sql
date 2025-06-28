@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2025 a las 20:29:37
+-- Tiempo de generación: 26-06-2025 a las 19:09:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -32,14 +32,14 @@ CREATE TABLE `cart` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `duration_days` int(11) NOT NULL DEFAULT 1
+  `days` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `cart`
 --
 
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `duration_days`) VALUES
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `days`) VALUES
 (7, 9, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -77,6 +77,25 @@ CREATE TABLE `details` (
   `price` decimal(10,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `details`
+--
+
+INSERT INTO `details` (`id`, `sales_id`, `product_id`, `quantity`, `price`) VALUES
+(14, 9, 11, 2, 0.00),
+(15, 9, 13, 5, 0.00),
+(16, 9, 3, 2, 0.00),
+(17, 9, 1, 3, 0.00),
+(18, 10, 13, 3, 0.00),
+(19, 10, 2, 4, 0.00),
+(20, 10, 19, 5, 0.00),
+(21, 11, 1, 1, 0.00),
+(22, 12, 9, 1, 0.00),
+(23, 13, 10, 1, 0.00),
+(24, 14, 4, 1, 0.00),
+(25, 18, 4, 5, 1400.00),
+(26, 19, 1, 5, 850.00);
+
 -- --------------------------------------------------------
 
 --
@@ -92,21 +111,20 @@ CREATE TABLE `products` (
   `price` double NOT NULL,
   `photo` varchar(200) NOT NULL,
   `date_view` date NOT NULL,
-  `counter` int(11) NOT NULL,
-  `duration_days` int(11) NOT NULL
+  `counter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `slug`, `price`, `photo`, `date_view`, `counter`, `duration_days`) VALUES
-(1, 1, 'Aventura en la Patagonia', '<p><strong>Programa individual a Patagonia Austral</strong>, diseñado para pasajeros que viajan de forma autónoma y desean una experiencia personalizada en contacto con la naturaleza.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> traslados in/out aeropuerto-hotel, alojamiento en establecimiento de categoría turista con desayuno</li>\r\n  <li><strong>Excursiones:</strong> Navegación regular por Lago Argentino con visita al Glaciar Upsala y trekking en El Chaltén (servicio compartido)</li>\r\n  <li><strong>Asistencia al viajero</strong> durante toda la estadía</li>\r\n</ul>', 'aventura-patagonia', 850, 'blank.png', '2025-06-28', 12, 0),
-(2, 1, 'Descanso en Termas de Río Hondo', '<p><strong>Programa termal de bienestar y relax</strong>, ideal para el cuidado físico y mental, orientado a pasajeros que buscan descanso activo y servicios terapéuticos.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 3 días / 2 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel termal con acceso ilimitado a piscinas mineromedicinales</li>\r\n  <li><strong>Régimen de comidas:</strong> media pensión (desayuno buffet + cena menú fijo)</li>\r\n  <li><strong>Servicios complementarios:</strong> uso de gimnasio, circuito hídrico y actividades de relajación</li>\r\n</ul>', 'termas-rio-hondo', 420, 'blank.png', '2025-06-28', 4, 0),
-(3, 2, 'Diversión en Bariloche', '<p><strong>Paquete familiar nieve y naturaleza</strong> diseñado para grupos familiares con menores, combinando recreación, naturaleza y confort en un entorno seguro.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en complejo familiar con habitaciones cuádruples, traslados regulares y asistencia local</li>\r\n  <li><strong>Excursiones:</strong> actividades guiadas en centros de nieve (trineo, caminatas, mini esquí para niños)</li>\r\n  <li><strong>Régimen de comidas:</strong> desayuno buffet incluido</li>\r\n</ul>', 'bariloche-familia', 1200, 'blank.png', '2025-06-28', 9, 0),
-(4, 2, 'Aventura en Cataratas', '<p><strong>Programa Iguazú en familia</strong>, enfocado en la interpretación ambiental y el turismo de naturaleza con servicios adaptados a familias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel con infraestructura para niños, traslados aeropuerto-hotel-aeropuerto</li>\r\n  <li><strong>Excursiones:</strong> circuito regular a Cataratas lado argentino con guía especializado y Tren de la Selva</li>\r\n  <li><strong>Régimen:</strong> pensión completa (desayuno, almuerzo, cena)</li>\r\n</ul>', 'cataratas-familia', 1400, 'blank.png', '2025-06-28', 24, 0),
-(5, 3, 'Escape a Mendoza con Amigos', '<p><strong>Tour grupal enogastronómico a Mendoza</strong>, ideal para grupos de afinidad o turismo corporativo, enfocado en la cultura del vino y el turismo de experiencias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> traslados grupales, alojamiento en base doble/múltiple en hostería turística</li>\r\n  <li><strong>Actividades:</strong> visitas a bodegas con cata dirigida, city tour en circuito regular y jornada libre para actividades opcionales</li>\r\n  <li><strong>Coordinador permanente</strong> y cobertura de asistencia al viajero</li>\r\n</ul>', 'mendoza-grupo', 980, 'blank.png', '2025-06-28', 4, 0),
-(6, 3, 'Tour Norte Argentino', '<p><strong>Circuito norte andino para grupos reducidos</strong>, con foco en el patrimonio cultural, paisajístico y gastronómico de las provincias de Salta y Jujuy.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hosterías con desayuno, traslados internos y excursiones en combi privada</li>\r\n  <li><strong>Itinerario:</strong> Salta capital, Cafayate, Cachi, Purmamarca y Quebrada de Humahuaca</li>\r\n  <li><strong>Servicios:</strong> guía regional, seguro médico y coordinación en destino</li>\r\n</ul>', 'norte-argentino-grupo', 1100, 'blank.png', '2025-06-26', 2, 0);
+INSERT INTO `products` (`id`, `category_id`, `name`, `description`, `slug`, `price`, `photo`, `date_view`, `counter`) VALUES
+(1, 1, 'Aventura en la Patagonia', '<p><strong>Programa individual a Patagonia Austral</strong>, diseñado para pasajeros que viajan de forma autónoma y desean una experiencia personalizada en contacto con la naturaleza.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> traslados in/out aeropuerto-hotel, alojamiento en establecimiento de categoría turista con desayuno</li>\r\n  <li><strong>Excursiones:</strong> Navegación regular por Lago Argentino con visita al Glaciar Upsala y trekking en El Chaltén (servicio compartido)</li>\r\n  <li><strong>Asistencia al viajero</strong> durante toda la estadía</li>\r\n</ul>', 'aventura-patagonia', 850, 'blank.png', '2025-06-26', 1),
+(2, 1, 'Descanso en Termas de Río Hondo', '<p><strong>Programa termal de bienestar y relax</strong>, ideal para el cuidado físico y mental, orientado a pasajeros que buscan descanso activo y servicios terapéuticos.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 3 días / 2 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel termal con acceso ilimitado a piscinas mineromedicinales</li>\r\n  <li><strong>Régimen de comidas:</strong> media pensión (desayuno buffet + cena menú fijo)</li>\r\n  <li><strong>Servicios complementarios:</strong> uso de gimnasio, circuito hídrico y actividades de relajación</li>\r\n</ul>', 'termas-rio-hondo', 420, 'blank.png', '2025-06-26', 3),
+(3, 2, 'Diversión en Bariloche', '<p><strong>Paquete familiar nieve y naturaleza</strong> diseñado para grupos familiares con menores, combinando recreación, naturaleza y confort en un entorno seguro.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en complejo familiar con habitaciones cuádruples, traslados regulares y asistencia local</li>\r\n  <li><strong>Excursiones:</strong> actividades guiadas en centros de nieve (trineo, caminatas, mini esquí para niños)</li>\r\n  <li><strong>Régimen de comidas:</strong> desayuno buffet incluido</li>\r\n</ul>', 'bariloche-familia', 1200, 'blank.png', '2025-06-26', 2),
+(4, 2, 'Aventura en Cataratas', '<p><strong>Programa Iguazú en familia</strong>, enfocado en la interpretación ambiental y el turismo de naturaleza con servicios adaptados a familias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hotel con infraestructura para niños, traslados aeropuerto-hotel-aeropuerto</li>\r\n  <li><strong>Excursiones:</strong> circuito regular a Cataratas lado argentino con guía especializado y Tren de la Selva</li>\r\n  <li><strong>Régimen:</strong> pensión completa (desayuno, almuerzo, cena)</li>\r\n</ul>', 'cataratas-familia', 1400, 'blank.png', '2025-06-26', 2),
+(5, 3, 'Escape a Mendoza con Amigos', '<p><strong>Tour grupal enogastronómico a Mendoza</strong>, ideal para grupos de afinidad o turismo corporativo, enfocado en la cultura del vino y el turismo de experiencias.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 4 días / 3 noches</li>\r\n  <li><strong>Incluye:</strong> traslados grupales, alojamiento en base doble/múltiple en hostería turística</li>\r\n  <li><strong>Actividades:</strong> visitas a bodegas con cata dirigida, city tour en circuito regular y jornada libre para actividades opcionales</li>\r\n  <li><strong>Coordinador permanente</strong> y cobertura de asistencia al viajero</li>\r\n</ul>', 'mendoza-grupo', 980, 'blank.png', '2025-06-25', 4),
+(6, 3, 'Tour Norte Argentino', '<p><strong>Circuito norte andino para grupos reducidos</strong>, con foco en el patrimonio cultural, paisajístico y gastronómico de las provincias de Salta y Jujuy.</p>\r\n<ul>\r\n  <li><strong>Duración:</strong> 5 días / 4 noches</li>\r\n  <li><strong>Incluye:</strong> alojamiento en hosterías con desayuno, traslados internos y excursiones en combi privada</li>\r\n  <li><strong>Itinerario:</strong> Salta capital, Cafayate, Cachi, Purmamarca y Quebrada de Humahuaca</li>\r\n  <li><strong>Servicios:</strong> guía regional, seguro médico y coordinación en destino</li>\r\n</ul>', 'norte-argentino-grupo', 1100, 'blank.png', '2025-06-26', 2);
 
 -- --------------------------------------------------------
 
@@ -131,13 +149,23 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `user_id`, `product_id`, `quantity`, `price`, `duration_days`, `reserved_at`, `status`, `expire_at`) VALUES
-(20, 29, 2, 2, 420.00, 1, '2025-06-28 14:11:35', 'pending', '2025-06-30 14:11:35'),
-(21, 29, 1, 3, 850.00, 1, '2025-06-28 14:11:55', 'pending', '2025-06-30 14:11:55'),
-(22, 29, 3, 2, 1200.00, 1, '2025-06-28 14:14:07', 'pending', '2025-06-30 14:14:07'),
-(23, 29, 1, 2, 850.00, 2, '2025-06-28 14:15:30', 'pending', '2025-06-30 14:15:30'),
-(24, 29, 3, 2, 1200.00, 2, '2025-06-28 14:21:41', 'pending', '2025-06-30 14:21:41'),
-(25, 29, 4, 7, 1400.00, 3, '2025-06-28 14:23:37', 'pending', '2025-06-30 14:23:37'),
-(26, 29, 1, 1, 850.00, 7, '2025-06-28 15:24:22', 'pending', '2025-06-30 15:24:22');
+(1, 29, 1, 3, 0.00, 4, '2025-06-25 12:33:07', 'cancelled', '2025-06-27 12:33:07'),
+(2, 29, 3, 1, 0.00, 1, '2025-06-25 13:05:16', 'cancelled', '2025-06-27 13:05:16'),
+(3, 29, 6, 1, 0.00, 1, '2025-06-25 14:14:26', 'cancelled', '2025-06-27 14:14:26'),
+(4, 29, 3, 1, 0.00, 1, '2025-06-25 14:15:15', 'cancelled', '2025-06-27 14:15:15'),
+(5, 29, 5, 4, 0.00, 1, '2025-06-25 14:15:15', 'cancelled', '2025-06-27 14:15:15'),
+(6, 29, 1, 1, 0.00, 1, '2025-06-25 14:15:15', 'cancelled', '2025-06-27 14:15:15'),
+(7, 29, 2, 1, 0.00, 1, '2025-06-25 14:22:05', 'cancelled', '2025-06-27 14:22:05'),
+(8, 29, 1, 5, 0.00, 4, '2025-06-25 15:47:06', 'cancelled', '2025-06-27 15:47:06'),
+(9, 29, 3, 1, 0.00, 1, '2025-06-28 16:13:53', 'cancelled', '2025-06-30 16:13:53'),
+(10, 29, 2, 1, 0.00, 1, '2025-06-28 16:26:39', 'cancelled', '2025-06-30 16:26:39'),
+(11, 29, 2, 5, 0.00, 1, '2025-06-26 13:42:29', 'cancelled', '2025-06-28 13:42:29'),
+(12, 29, 6, 9, 0.00, 1, '2025-06-26 13:42:29', 'cancelled', '2025-06-28 13:42:29'),
+(13, 29, 2, 3, 0.00, 1, '2025-06-26 13:42:56', 'cancelled', '2025-06-28 13:42:56'),
+(14, 29, 3, 2, 0.00, 2, '2025-06-26 13:47:15', 'cancelled', '2025-06-28 13:47:15'),
+(15, 29, 4, 5, 1400.00, 3, '2025-06-26 13:51:56', 'paid', '2025-06-28 13:51:56'),
+(16, 29, 1, 5, 850.00, 7, '2025-06-26 14:03:38', 'paid', '2025-06-28 14:03:38'),
+(17, 29, 4, 3, 1400.00, 3, '2025-06-26 14:07:33', 'pending', '2025-06-28 14:07:33');
 
 -- --------------------------------------------------------
 
@@ -151,6 +179,23 @@ CREATE TABLE `sales` (
   `pay_id` varchar(50) NOT NULL,
   `sales_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `sales`
+--
+
+INSERT INTO `sales` (`id`, `user_id`, `pay_id`, `sales_date`) VALUES
+(9, 9, 'PAY-1RT494832H294925RLLZ7TZA', '2018-05-10'),
+(10, 9, 'PAY-21700797GV667562HLLZ7ZVY', '2018-05-10'),
+(11, 28, '4LY31586LC540194A', '2025-06-24'),
+(12, 28, '2DC48247H02518136', '2025-06-24'),
+(13, 28, '8VK41743H69735216', '2025-06-24'),
+(14, 28, '5DW873854A883971H', '2025-06-25'),
+(15, 29, '02722484A6163451Y', '2025-06-28'),
+(16, 29, '65M237995G877925H', '2025-06-26'),
+(17, 29, '0K06024074094752E', '2025-06-26'),
+(18, 29, '3YU60331ME969240B', '2025-06-26'),
+(19, 29, '8BE06654YB401452R', '2025-06-26');
 
 -- --------------------------------------------------------
 
@@ -244,7 +289,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
@@ -268,7 +313,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `sales`
