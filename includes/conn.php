@@ -2,10 +2,10 @@
 
 class Database {
 
-	private $host = "sql107.infinityfree.com";
-	private $dbname = "if0_39331618_ecomm"; // Reemplazá con el nombre correcto de tu base de datos
-	private $username = "if0_39331618";
-	private $password = "GewsKfWastFpra";
+	private $host = "localhost"; // local
+	private $dbname = "ecomm"; // nombre de la base de datos que creaste en localhost
+	private $username = "root"; // usuario predeterminado de XAMPP
+	private $password = ""; // sin contraseña por defecto
 	private $options  = array(
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -32,5 +32,4 @@ class Database {
 }
 
 $pdo = new Database();
-
 ?>

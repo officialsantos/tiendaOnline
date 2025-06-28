@@ -8,11 +8,9 @@ if(!isset($_SESSION['user'])){
     exit();
 }
 
-// Como $_SESSION['user'] es el ID, lo usamos directamente
 $user_id = $_SESSION['user'];
 
 try {
-    // Abrir conexión
     $conn = $pdo->open();
 
     // Obtener el carrito del usuario
@@ -26,11 +24,10 @@ try {
         exit();
     }
 
-    // Preparar inserción en reservaciones incluyendo precio y duración de días
     $stmt_insert = $conn->prepare("INSERT INTO reservations (user_id, product_id, quantity, price, duration_days, reserved_at, status, expire_at) VALUES (:user_id, :product_id, :quantity, :price, :duration_days, NOW(), 'pending', DATE_ADD(NOW(), INTERVAL 2 DAY))");
 
     foreach ($cart_items as $item) {
-        $duration_days = isset($item['days']) ? $item['days'] : 1; // Por defecto 1 día
+        $duration_days = isset($item['duration_days']) ? $item['duration_days'] : 1;
 
         // Obtener precio actual del producto
         $stmt_price = $conn->prepare("SELECT price FROM products WHERE id = :product_id");
@@ -55,7 +52,7 @@ try {
     $pdo->close();
 
     $_SESSION['success'] = "¡Reserva creada! Tienes 2 días para pagar antes de que caduque.";
-    header('Location: profile.php'); // Redirige a la página de reservas
+    header('Location: profile.php');
     exit();
 
 } catch (PDOException $e) {

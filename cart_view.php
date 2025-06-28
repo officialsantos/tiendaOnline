@@ -18,8 +18,6 @@
 								<table class="table table-bordered">
 									<thead>
 										<th></th>
-										
-
 										<th>Nombre</th>
 										<th>Precio</th>
 										<th width="18%">Personas</th>
