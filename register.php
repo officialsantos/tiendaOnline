@@ -18,7 +18,7 @@
 		if(!isset($_SESSION['captcha'])){
 			require('recaptcha/src/autoload.php');		
 			// $recaptcha = new \ReCaptcha\ReCaptcha('6LcxXmIaAAAAAFSY6wjaHDl65lmpTyXu-iBYBhp3', new \ReCaptcha\RequestMethod\SocketPost());
-			$recaptcha = new \ReCaptcha\ReCaptcha('6LcxXmIaAAAAAFSY6wjaHDl65lmpTyXu-iBYBhp3');
+			$recaptcha = new \ReCaptcha\ReCaptcha('6LdV8XArAAAAABuOKfVaMKw7BJyM3h5D7zqms9Zr');
 			$resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
                       ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 			// $resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
@@ -62,11 +62,9 @@
 					$userid = $conn->lastInsertId();
 
 					$message = "
-						<h2>Gracias por registrarte</h2>
-						<p>Tu Cuenta:</p>
-						<p>Email: ".$email."</p>
+						<h2>¡Gracias por registrarse!</h2>
 						<p>Por favor, cliquee en el enlace para activar su cuenta.</p>
-						<a href='http://localhost/olimpiadas/activate.php?code=".$code."&user=".$userid."'>Activar Cuenta</a>
+						<a href='https://patagoniaviajes.infinityfreeapp.com/activate.php?code=".$code."&user=".$userid."'>Activar mi cuenta</a>
 					";
 
 					//Load phpmailer
@@ -98,7 +96,7 @@
 				       
 				        //Content
 				        $mail->isHTML(true);                                  
-				        $mail->Subject = 'ECommerce Site Sign Up';
+				        $mail->Subject = '¡Bienvenido a PatagoniaViajes!';
 				        $mail->Body    = $message;
 
 				        $mail->send();
