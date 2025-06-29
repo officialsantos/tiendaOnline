@@ -49,7 +49,7 @@
                     <label for="curr_password" class="col-sm-3 control-label">Contraseña Actual:</label>
 
                     <div class="col-sm-9">
-                      <input type="password" class="form-control" id="curr_password" name="curr_password" placeholder="input current password to save changes" required>
+                      <input type="password" class="form-control" id="curr_password" name="curr_password" placeholder="re-escriba su contraseña para guardar los cambios" required>
                     </div>
                 </div>
           	</div>
