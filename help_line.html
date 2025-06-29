@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayuda en línea – Patagonia Viajes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    #help-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #007bff;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    #help-widget {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 360px;
+      max-height: 90vh;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1001;
+      transition: all 0.3s ease;
+    }
+
+    #help-widget.active {
+      display: flex;
+    }
+
+    #help-widget .header {
+      background: #007bff;
+      color: #fff;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #help-widget .header .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    #help-widget .header .close-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    #help-widget .content {
+      padding: 16px;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    #help-widget .content h3 {
+      margin-top: 10px;
+      color: #007bff;
+    }
+
+    #help-widget .content p, 
+    #help-widget .content li {
+      margin-bottom: 8px;
+    }
+
+    #help-widget .content ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div id="help-button" title="Ayuda en línea">💬</div>
+
+<div id="help-widget">
+  <div class="header">
+    <span class="title">🧭 Ayuda en línea – Patagonia Viajes</span>
+    <button class="close-btn">×</button>
+  </div>
+  <div class="content">
+    <h3>🔑 Acceso a la plataforma</h3>
+    <p>Para ingresar al sitio web de Patagonia Viajes, usá el siguiente enlace:</p>
+    <p>🌐 <a href="https://patagoniaviajes.infinityfreeapp.com/index.php" target="_blank">patagoniaviajes.infinityfreeapp.com</a></p>
+
+    <p>Para comprar paquetes, necesitás tener una cuenta.</p>
+
+    <p><strong>Si ya tenés cuenta:</strong></p>
+    <ul>
+      <li>Hacé clic en <strong>“Iniciar sesión”</strong>.</li>
+      <li>Ingresá tu correo electrónico y contraseña.</li>
+    </ul>
+
+    <p><strong>Si no tenés cuenta:</strong></p>
+    <ul>
+      <li>Hacé clic en <strong>“Registrarse”</strong>.</li>
+      <li>Completá todos los campos del formulario.</li>
+      <li>Resolvé el captcha.</li>
+      <li>Confirmá tu cuenta desde el correo que te vamos a enviar.</li>
+    </ul>
+
+    <hr>
+
+    <h3>🛒 ¿Cómo comprar un paquete?</h3>
+    <ol>
+      <li>Entrá a la sección <strong>“Categoría”</strong>.</li>
+      <li>Elegí un paquete turístico.</li>
+      <li>Hacé clic en <strong>“Agregar al carrito”</strong>.</li>
+      <li>Revisá el carrito, al lado del ícono de tu perfil.</li>
+      <li>Seleccioná:
+        <ul>
+          <li><strong>Reservar</strong>: guardás el paquete sin pagar.</li>
+          <li><strong>Pagar ahora</strong>: realizás la compra inmediata.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <hr>
+
+    <h3>💳 Medios de pago</h3>
+    <p><strong>PayPal:</strong> Iniciá sesión en tu cuenta PayPal y completá el pago de forma segura.</p>
+    <p><strong>Tarjeta de crédito o débito:</strong> Completá los datos en el formulario. Podés cambiar el país de origen de tu tarjeta haciendo clic en la bandera del formulario.</p>
+
+    <hr>
+
+    <h3>👤 Perfil del usuario</h3>
+    <p>En la sección <strong>“Perfil”</strong> podés ver y modificar:</p>
+    <ul>
+      <li>Historial de compras y reservas.</li>
+      <li>Confirmar o cancelar tus reservas.</li>
+      <li>Tus datos personales: nombre, email, fecha de registro.</li>
+      <li>Editar información como dirección, contacto y foto de perfil.</li>
+    </ul>
+    <p>🔒 Para guardar cambios, ingresá tu contraseña actual.</p>
+
+    <hr>
+
+    <h3>🔐 ¿Olvidaste tu contraseña?</h3>
+    <ol>
+      <li>Hacé clic en <strong>“¿Olvidaste tu contraseña?”</strong> en el formulario de inicio de sesión.</li>
+      <li>Ingresá tu email.</li>
+      <li>Revisá tu bandeja de entrada o la carpeta de <em>spam</em>.</li>
+      <li>Hacé clic en el enlace recibido y seguí los pasos para crear una nueva contraseña segura.</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('help-button');
+  const widget = document.getElementById('help-widget');
+  const close = widget.querySelector('.close-btn');
+
+  btn.addEventListener('click', () => {
+    widget.classList.toggle('active');
+  });
+
+  close.addEventListener('click', () => {
+    widget.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>
