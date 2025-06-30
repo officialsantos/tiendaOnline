@@ -20,7 +20,7 @@ $user_id = $_SESSION['user'];
 $conn = $pdo->open();
 
 try {
-    // Obtener datos de reservación (sin intentar obtener precio acá, eso se hace desde productos)
+    // Obtener datos de reservación
     $stmt = $conn->prepare("SELECT * FROM reservations WHERE id=:id AND user_id=:user_id");
     $stmt->execute(['id' => $reservation_id, 'user_id' => $user_id]);
     $reservation = $stmt->fetch();
@@ -31,36 +31,29 @@ try {
         exit();
     }
 
-    // Obtener precio y datos del producto relacionado
-    $stmt = $conn->prepare("SELECT price FROM products WHERE id = :product_id");
-    $stmt->execute(['product_id' => $reservation['product_id']]);
-    $product = $stmt->fetch();
+    // Precio total ya calculado y guardado en la reservación
+    $precio_total = $reservation['price']; // Usa el campo correcto
 
-    if (!$product) {
-        $_SESSION['error'] = 'Producto no encontrado.';
-        header('Location: profile.php');
-        exit();
-    }
-
-    // Calcular monto total (cantidad * precio * duración días si existe)
-    $duration_days = isset($reservation['duration_days']) && $reservation['duration_days'] > 0 ? $reservation['duration_days'] : 1;
-    $amount = $product['price'] * $reservation['quantity'] * $duration_days;
-
-    // Insertar en tabla sales
-    $stmt = $conn->prepare("INSERT INTO sales (user_id, pay_id, sales_date) VALUES (:user_id, :pay_id, NOW())");
-    $stmt->execute(['user_id' => $user_id, 'pay_id' => $order_id]);
+    // Insertar en tabla sales incluyendo el total pagado
+    $stmt = $conn->prepare("INSERT INTO sales (user_id, pay_id, sales_date, total_paid) VALUES (:user_id, :pay_id, NOW(), :total_paid)");
+    $stmt->execute([
+        'user_id' => $user_id,
+        'pay_id' => $order_id,
+        'total_paid' => $precio_total
+    ]);
     $sales_id = $conn->lastInsertId();
 
-    // Insertar en tabla details con el precio correcto
-    $stmt = $conn->prepare("INSERT INTO details (sales_id, product_id, price, quantity) VALUES (:sales_id, :product_id, :price, :quantity)");
+    // Insertar en tabla details, incluyendo duration_days y el precio tal cual
+    $stmt = $conn->prepare("INSERT INTO details (sales_id, product_id, quantity, duration_days, price) VALUES (:sales_id, :product_id, :quantity, :duration_days, :price)");
     $stmt->execute([
         'sales_id' => $sales_id,
         'product_id' => $reservation['product_id'],
-        'price' => $product['price'],
-        'quantity' => $reservation['quantity']
+        'quantity' => $reservation['quantity'],
+        'duration_days' => $reservation['duration_days'],
+        'price' => $precio_total
     ]);
 
-    // Actualizar estado de reservación a completed o paid
+    // Actualizar estado de reservación a pagado
     $stmt = $conn->prepare("UPDATE reservations SET status='paid' WHERE id=:id");
     $stmt->execute(['id' => $reservation_id]);
 

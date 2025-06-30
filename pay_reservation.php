@@ -20,7 +20,7 @@ $user_id = $_SESSION['user'];
 $conn = $pdo->open();
 
 try {
-    // Consulta mejorada: traemos solo el nombre del producto, precio lo tomamos de la reserva
+    // Traemos solo el nombre del producto y los datos de la reservación
     $stmt = $conn->prepare("
         SELECT r.*, p.name AS product_name
         FROM reservations r 
@@ -42,10 +42,10 @@ try {
         exit();
     }
 
-    $duration_days = isset($reservation['duration_days']) && $reservation['duration_days'] > 0 ? $reservation['duration_days'] : 1;
+    $duration_days = (isset($reservation['duration_days']) && $reservation['duration_days'] > 0) ? $reservation['duration_days'] : 1;
 
-    // Usamos el precio guardado en la reserva, no el de products
-    $total = $reservation['price'] * $reservation['quantity'] * $duration_days;
+    // Usamos el precio total ya calculado y guardado en la reservación directamente
+    $total = $reservation['price'];
     $product_name = $reservation['product_name'];
 
 } catch (PDOException $e) {
@@ -95,7 +95,7 @@ $pdo->close();
               },
               onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                  // Redirigir para registrar el pago
+                  // Redirigir para registrar el pago con IDs correctos
                   window.location = "paypal_success.php?reservation_id=<?= $reservation_id ?>&order_id=" + data.orderID;
                 });
               }

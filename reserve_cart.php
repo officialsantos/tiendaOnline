@@ -34,14 +34,19 @@ try {
         $stmt_price->execute(['product_id' => $item['product_id']]);
         $product = $stmt_price->fetch();
 
-        $price = $product ? $product['price'] : 0;
+        $price_unitario = $product ? $product['price'] : 0;
+        $cantidad = $item['quantity'];
+        $duracion = $duration_days > 0 ? $duration_days : 1;
+
+        // Calcular precio total: precio unitario * cantidad * duración
+        $precio_total = $price_unitario * $cantidad * $duracion;
 
         $stmt_insert->execute([
             'user_id' => $user_id,
             'product_id' => $item['product_id'],
-            'quantity' => $item['quantity'],
-            'price' => $price,
-            'duration_days' => $duration_days
+            'quantity' => $cantidad,
+            'price' => $precio_total,
+            'duration_days' => $duracion
         ]);
     }
 

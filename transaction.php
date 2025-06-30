@@ -1,33 +1,65 @@
 <?php
-	include 'includes/session.php';
+include 'includes/session.php';
+require_once 'includes/conn.php';
 
-	$id = $_POST['id'];
+if(!isset($_POST['id'])){
+    echo json_encode(['error' => 'No se recibió ID de venta']);
+    exit();
+}
 
-	$conn = $pdo->open();
+$sales_id = $_POST['id'];
 
-	$output = array('list'=>'');
+$conn = $pdo->open();
 
-	$stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id LEFT JOIN sales ON sales.id=details.sales_id WHERE details.sales_id=:id");
-	$stmt->execute(['id'=>$id]);
+try {
+    // Obtener info general de la venta (fecha y pay_id)
+    $stmt = $conn->prepare("SELECT sales_date, pay_id FROM sales WHERE id = :id");
+    $stmt->execute(['id' => $sales_id]);
+    $sale = $stmt->fetch();
 
-	$total = 0;
-	foreach($stmt as $row){
-		$output['transaction'] = $row['pay_id'];
-		$output['date'] = date('M d, Y', strtotime($row['sales_date']));
-		$subtotal = $row['price']*$row['quantity'];
-		$total += $subtotal;
-		$output['list'] .= "
-			<tr class='prepend_items'>
-				<td>".$row['name']."</td>
-				<td>&#36; ".number_format($row['price'], 2)."</td>
-				<td>".$row['quantity']."</td>
-				<td>&#36; ".number_format($subtotal, 2)."</td>
-			</tr>
-		";
-	}
-	
-	$output['total'] = '<b>&#36; '.number_format($total, 2).'<b>';
-	$pdo->close();
-	echo json_encode($output);
+    if (!$sale) {
+        echo json_encode(['error' => 'Venta no encontrada']);
+        exit();
+    }
 
+    // Obtener detalles de la venta incluyendo duration_days
+    $stmt = $conn->prepare("SELECT d.*, p.name 
+                            FROM details d 
+                            LEFT JOIN products p ON p.id = d.product_id 
+                            WHERE d.sales_id = :id");
+    $stmt->execute(['id' => $sales_id]);
+    $details = $stmt->fetchAll();
+
+    $list = '';
+    $total = 0;
+
+    foreach($details as $row){
+        // Asumimos que price ya es el total por ese detalle
+        $subtotal = $row['price']; 
+
+        $total += $subtotal;
+
+        $list .= "<tr>
+                    <td>".htmlspecialchars($row['name'])."</td>
+                    <td>$ ".number_format($row['price'], 2)."</td>
+                    <td>".(int)$row['quantity']."</td>
+                    <td>".(int)$row['duration_days']."</td>  <!-- Duración agregada -->
+                    <td>$ ".number_format($subtotal, 2)."</td>
+                  </tr>";
+    }
+
+    $data = [
+        'date' => date('M d, Y', strtotime($sale['sales_date'])),
+        'transaction' => htmlspecialchars($sale['pay_id']),
+        'list' => $list,
+        'total' => "$ ".number_format($total, 2)
+    ];
+
+    echo json_encode($data);
+
+} catch(PDOException $e){
+    echo json_encode(['error' => $e->getMessage()]);
+}
+
+$pdo->close();
 ?>

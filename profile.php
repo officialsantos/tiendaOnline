@@ -130,6 +130,7 @@
 	        						<th>Paquete</th>
 	        						<th>Cantidad</th>
 	        						<th>Duración (días)</th>
+	        						<th>Monto a Pagar</th>
 	        						<th>Fecha de Reserva</th>
 	        						<th>Estado</th>
 	        						<th>Acciones</th>
@@ -142,11 +143,19 @@
 	        							$stmt = $conn->prepare("SELECT r.id, p.name, r.quantity, r.duration_days, r.reserved_at, r.status FROM reservations r JOIN products p ON r.product_id = p.id WHERE r.user_id=:user_id ORDER BY r.reserved_at DESC");
 	        							$stmt->execute(['user_id'=>$user['id']]);
 	        							foreach($stmt as $res) {
+	        								// Obtener precio unitario del producto
+	        								$stmt_price = $conn->prepare("SELECT price FROM products WHERE id = (SELECT product_id FROM reservations WHERE id = :res_id)");
+	        								$stmt_price->execute(['res_id' => $res['id']]);
+	        								$product_price = $stmt_price->fetchColumn();
+
+	        								$monto_pagar = $product_price * $res['quantity'] * $res['duration_days'];
+
 	        								echo "
 	        									<tr>
 	        										<td>".htmlspecialchars($res['name'])."</td>
 	        										<td>".(int)$res['quantity']."</td>
 	        										<td>".(int)$res['duration_days']."</td>
+	        										<td>&#36; ".number_format($monto_pagar, 2)."</td>
 	        										<td>".date('d/m/Y', strtotime($res['reserved_at']))."</td>
 	        										<td>".ucfirst($res['status'])."</td>
 	        										<td>
@@ -170,7 +179,7 @@
 	        							}
 
 	        						} catch(PDOException $e) {
-	        							echo "<tr><td colspan='6'>Error al cargar reservaciones.</td></tr>";
+	        							echo "<tr><td colspan='7'>Error al cargar reservaciones.</td></tr>";
 	        						}
 
 	        						$pdo->close();
@@ -196,27 +205,28 @@
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
-	$(document).on('click', '.transact', function(e){
-		e.preventDefault();
-		$('#transaction').modal('show');
-		var id = $(this).data('id');
-		$.ajax({
-			type: 'POST',
-			url: 'transaction.php',
-			data: {id:id},
-			dataType: 'json',
-			success:function(response){
-				$('#date').html(response.date);
-				$('#transid').html(response.transaction);
-				$('#detail').prepend(response.list);
-				$('#total').html(response.total);
-			}
-		});
-	});
+    // Cambié .transact-btn por .transact para que coincida con el botón
+    $(document).on('click', '.transact', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
 
-	$("#transaction").on("hidden.bs.modal", function () {
-	    $('.prepend_items').remove();
-	});
+        $.ajax({
+            url: 'transaction.php', // corregí nombre archivo (antes 'transacion.php')
+            method: 'POST',
+            data: { id: id },
+            dataType: 'json',
+            success: function(data) {
+                $('#date').text(data.date);
+                $('#transid').text(data.transaction);
+                $('#detail').html(data.list);
+                $('#total').html(data.total);
+                $('#transaction').modal('show');
+            },
+            error: function() {
+                alert('Error al cargar los datos de la transacción');
+            }
+        });
+    });
 });
 </script>
 </body>
