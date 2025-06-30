@@ -118,6 +118,70 @@
 	        				</table>
 	        			</div>
 	        		</div>
+					<!-- Modal para editar perfil -->
+					<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+						<form method="POST" action="profile_edit.php" enctype="multipart/form-data">
+							<div class="modal-header">
+							<h4 class="modal-title" id="editLabel">Editar Perfil</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							</div>
+							<div class="modal-body">
+							<!-- Campo oculto para enviar el "edit" -->
+							<input type="hidden" name="edit" value="1">
+							
+							<div class="form-group">
+								<label for="firstname">Nombre</label>
+								<input type="text" class="form-control" name="firstname" value="<?php echo htmlspecialchars($user['firstname']); ?>" required>
+							</div>
+
+							<div class="form-group">
+								<label for="lastname">Apellido</label>
+								<input type="text" class="form-control" name="lastname" value="<?php echo htmlspecialchars($user['lastname']); ?>" required>
+							</div>
+
+							<div class="form-group">
+								<label for="email">Correo</label>
+								<input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+							</div>
+
+							<div class="form-group">
+								<label for="contact">Información de contacto</label>
+								<input type="text" class="form-control" name="contact" value="<?php echo htmlspecialchars($user['contact_info']); ?>">
+							</div>
+
+							<div class="form-group">
+								<label for="address">Dirección</label>
+								<input type="text" class="form-control" name="address" value="<?php echo htmlspecialchars($user['address']); ?>">
+							</div>
+
+							<div class="form-group">
+								<label for="password">Nueva Contraseña</label>
+								<input type="password" class="form-control" name="password" placeholder="Dejar en blanco para no cambiar">
+							</div>
+
+							<div class="form-group">
+								<label for="curr_password">Contraseña actual</label>
+								<input type="password" class="form-control" name="curr_password" required>
+							</div>
+
+							<div class="form-group">
+								<label for="photo">Foto de perfil</label>
+								<input type="file" class="form-control" name="photo">
+							</div>
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+							</div>
+						</form>
+						</div>
+					</div>
+					</div>
+
 
 	        		<!-- Reservaciones Pendientes -->
 	        		<div class="box box-solid">
