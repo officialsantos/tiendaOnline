@@ -53,9 +53,9 @@ try {
         'price' => $precio_total
     ]);
 
-    // Actualizar estado de reservación a pagado
-    $stmt = $conn->prepare("UPDATE reservations SET status='paid' WHERE id=:id");
-    $stmt->execute(['id' => $reservation_id]);
+    // Actualizar estado de reservación a pagado Y guardar el sales_id
+    $stmt = $conn->prepare("UPDATE reservations SET status='paid', sales_id=:sales_id WHERE id=:id");
+    $stmt->execute(['id' => $reservation_id, 'sales_id' => $sales_id]);
 
     $_SESSION['success'] = 'Pago realizado correctamente. Reservación confirmada.';
     header('Location: profile.php');

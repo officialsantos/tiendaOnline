@@ -78,7 +78,7 @@
 	        						<th class="hidden"></th>
 	        						<th>Fecha</th>
 	        						<th>Transacción#</th>
-	        						<th>Cantidad</th>
+	        						<th>Total pagado</th>
 	        						<th>Detalles Completos</th>
 	        					</thead>
 	        					<tbody>
@@ -101,7 +101,7 @@
 	        										<td class='hidden'></td>
 	        										<td>".date('M d, Y', strtotime($row['sales_date']))."</td>
 	        										<td>".htmlspecialchars($row['pay_id'])."</td>
-	        										<td>&#36; ".number_format($total, 2)."</td>
+	        										<td>".htmlspecialchars($row['total_paid'])."</td>
 	        										<td><button class='btn btn-sm btn-flat btn-info transact' data-id='".$row['id']."'><i class='fa fa-search'></i> Ver</button></td>
 	        									</tr>
 	        								";

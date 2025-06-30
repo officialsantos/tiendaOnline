@@ -12,8 +12,8 @@ $sales_id = $_POST['id'];
 $conn = $pdo->open();
 
 try {
-    // Obtener info general de la venta (fecha y pay_id)
-    $stmt = $conn->prepare("SELECT sales_date, pay_id FROM sales WHERE id = :id");
+    // Obtener info general de la venta
+    $stmt = $conn->prepare("SELECT sales_date, pay_id, total_paid FROM sales WHERE id = :id");
     $stmt->execute(['id' => $sales_id]);
     $sale = $stmt->fetch();
 
@@ -22,28 +22,25 @@ try {
         exit();
     }
 
-    // Obtener detalles de la venta incluyendo duration_days
-    $stmt = $conn->prepare("SELECT d.*, p.name 
-                            FROM details d 
-                            LEFT JOIN products p ON p.id = d.product_id 
+    // Traer detalles y también el precio del producto
+    $stmt = $conn->prepare("SELECT d.*, p.name, p.price AS unit_price
+                            FROM details d
+                            LEFT JOIN products p ON p.id = d.product_id
                             WHERE d.sales_id = :id");
     $stmt->execute(['id' => $sales_id]);
     $details = $stmt->fetchAll();
 
     $list = '';
-    $total = 0;
 
     foreach($details as $row){
-        // Asumimos que price ya es el total por ese detalle
-        $subtotal = $row['price']; 
-
-        $total += $subtotal;
+        $product_price = $row['unit_price'];
+        $subtotal = $row['price']; // Total de ese ítem (ya cargado en la base)
 
         $list .= "<tr>
                     <td>".htmlspecialchars($row['name'])."</td>
-                    <td>$ ".number_format($row['price'], 2)."</td>
+                    <td>$ ".number_format($product_price, 2)."</td>
                     <td>".(int)$row['quantity']."</td>
-                    <td>".(int)$row['duration_days']."</td>  <!-- Duración agregada -->
+                    <td>".(int)$row['duration_days']."</td>
                     <td>$ ".number_format($subtotal, 2)."</td>
                   </tr>";
     }
@@ -52,7 +49,7 @@ try {
         'date' => date('M d, Y', strtotime($sale['sales_date'])),
         'transaction' => htmlspecialchars($sale['pay_id']),
         'list' => $list,
-        'total' => "$ ".number_format($total, 2)
+        'total' => "$ ".number_format($sale['total_paid'], 2)
     ];
 
     echo json_encode($data);

@@ -6,20 +6,15 @@
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Historial de Ventas
-      </h1>
+      <h1>Historial de Ventas</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Ventas</li>
       </ol>
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -28,9 +23,7 @@
               <div class="pull-right">
                 <form method="POST" class="form-inline" action="">
                   <div class="input-group">
-                    <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                    </div>
+                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                     <input type="text" class="form-control pull-right col-sm-8" id="reservation" name="date_range">
                   </div>
                   <button type="submit" class="btn btn-success btn-sm btn-flat" name="print"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
@@ -41,40 +34,49 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   <th class="hidden"></th>
-                  <th>Fecha</th>
+                  <th>Fecha de Venta</th>
                   <th>Nombre del Cliente</th>
                   <th>Transacción#</th>
-                  <th>Cantidad</th>
+                  <th>Fecha de Reservación</th>
+                  <th>Total a Pagar</th>
                   <th>Detalles Completos</th>
                 </thead>
                 <tbody>
                   <?php
                     $conn = $pdo->open();
 
-                    try{
-                      $stmt = $conn->prepare("SELECT *, sales.id AS salesid FROM sales LEFT JOIN users ON users.id=sales.user_id ORDER BY sales_date DESC");
+                    try {
+                      $stmt = $conn->prepare("
+                        SELECT sales.*, users.firstname, users.lastname, reservations.reserved_at, sales.id AS salesid
+                        FROM sales
+                        LEFT JOIN users ON users.id = sales.user_id
+                        LEFT JOIN reservations ON reservations.sales_id = sales.id
+                        ORDER BY sales.sales_date DESC
+                      ");
                       $stmt->execute();
-                      foreach($stmt as $row){
-                        $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id WHERE details.sales_id=:id");
-                        $stmt->execute(['id'=>$row['salesid']]);
+
+                      foreach ($stmt as $row) {
+                        // Calcular total
+                        $stmtDetails = $conn->prepare("SELECT * FROM details WHERE sales_id = :id");
+                        $stmtDetails->execute(['id' => $row['salesid']]);
                         $total = 0;
-                        foreach($stmt as $details){
-                          $subtotal = $details['price']*$details['quantity'];
-                          $total += $subtotal;
+                        foreach ($stmtDetails as $detail) {
+                          $total = $detail['price'];
                         }
+
                         echo "
                           <tr>
                             <td class='hidden'></td>
                             <td>".date('M d, Y', strtotime($row['sales_date']))."</td>
-                            <td>".$row['firstname'].' '.$row['lastname']."</td>
-                            <td>".$row['pay_id']."</td>
+                            <td>".htmlspecialchars($row['firstname'])." ".htmlspecialchars($row['lastname'])."</td>
+                            <td>".htmlspecialchars($row['pay_id'])."</td>
+                            <td>".($row['reserved_at'] ? date('M d, Y', strtotime($row['reserved_at'])) : 'Sin reservación')."</td>
                             <td>&#36; ".number_format($total, 2)."</td>
                             <td><button type='button' class='btn btn-info btn-sm btn-flat transact' data-id='".$row['salesid']."'><i class='fa fa-search'></i> Ver</button></td>
                           </tr>
                         ";
                       }
-                    }
-                    catch(PDOException $e){
+                    } catch (PDOException $e) {
                       echo $e->getMessage();
                     }
 
@@ -87,56 +89,35 @@
         </div>
       </div>
     </section>
-     
+
   </div>
-  	<?php include 'includes/footer.php'; ?>
-    <?php include '../includes/profile_modal.php'; ?>
+  <?php include 'includes/footer.php'; ?>
+  <?php include '../includes/profile_modal.php'; ?>
 
 </div>
-<!-- ./wrapper -->
-
 <?php include 'includes/scripts.php'; ?>
 <!-- Date Picker -->
 <script>
 $(function(){
-  //Date picker
-  $('#datepicker_add').datepicker({
-    autoclose: true,
-    format: 'yyyy-mm-dd'
-  })
-  $('#datepicker_edit').datepicker({
-    autoclose: true,
-    format: 'yyyy-mm-dd'
-  })
+  $('#datepicker_add').datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
+  $('#datepicker_edit').datepicker({ autoclose: true, format: 'yyyy-mm-dd' });
 
-  //Timepicker
-  $('.timepicker').timepicker({
-    showInputs: false
-  })
+  $('.timepicker').timepicker({ showInputs: false });
 
-  //Date range picker
-  $('#reservation').daterangepicker()
-  //Date range picker with time picker
-  $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-  //Date range as a button
-  $('#daterange-btn').daterangepicker(
-    {
-      ranges   : {
-        'Today'       : [moment(), moment()],
-        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      startDate: moment().subtract(29, 'days'),
-      endDate  : moment()
+  $('#reservation').daterangepicker();
+  $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
+  $('#daterange-btn').daterangepicker({
+    ranges   : {
+      'Today'       : [moment(), moment()],
+      'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+      'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
     },
-    function (start, end) {
-      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-    }
-  )
-  
+    startDate: moment().subtract(29, 'days'),
+    endDate  : moment()
+  });
 });
 </script>
 <script>
