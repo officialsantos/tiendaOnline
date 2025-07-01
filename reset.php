@@ -25,7 +25,7 @@
 					<h2>Reinicio de Contraseña</h2>
 					<p>Por favor, cliquee en el enlace para reestablecer tu contraseña.</p>
 					<p>Si no fue usted, sus credenciales pueden estar en peligro. Contáctese con el soporte de PatagoniaViajes.</p>
-					<a href='https://patagoniaviajes.infinityfreeapp.com/reset.php?code=".$code."&user=".$row['id']."'>Reiniciar Contraseña</a>
+					<a href='https://patagoniaviajes.infinityfreeapp.com/password_reset.php?code=".$code."&user=".$row['id']."'>Reiniciar Contraseña</a>
 				";
 
 				//Load phpmailer
