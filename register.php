@@ -64,6 +64,7 @@
 					$message = "
 						<h2>¡Gracias por registrarse!</h2>
 						<p>Por favor, cliquee en el enlace para activar su cuenta.</p>
+						<p>Si no fue usted, sus credenciales pueden estar en peligro. Contáctese con el soporte de PatagoniaViajes.</p>
 						<a href='https://patagoniaviajes.infinityfreeapp.com/activate.php?code=".$code."&user=".$userid."'>Activar mi cuenta</a>
 					";
 
@@ -96,7 +97,7 @@
 				       
 				        //Content
 				        $mail->isHTML(true);                                  
-				        $mail->Subject = '¡Bienvenido a PatagoniaViajes!';
+				        $mail->Subject = 'Bienvenido a PatagoniaViajes';
 				        $mail->Body    = $message;
 
 				        $mail->send();
