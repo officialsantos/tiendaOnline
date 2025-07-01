@@ -203,6 +203,13 @@
 	        					<?php
 	        						$conn = $pdo->open();
 
+									try {
+										$stmt_cancel = $conn->prepare("UPDATE reservations SET status = 'cancelled' WHERE status = 'pending' AND expire_at <= NOW()");
+										$stmt_cancel->execute();
+									} catch (PDOException $e) {
+										// Puedes registrar el error si deseas
+									}
+
 	        						try {
 	        							$stmt = $conn->prepare("SELECT r.id, p.name, r.quantity, r.duration_days, r.reserved_at, r.status FROM reservations r JOIN products p ON r.product_id = p.id WHERE r.user_id=:user_id ORDER BY r.reserved_at DESC");
 	        							$stmt->execute(['user_id'=>$user['id']]);
