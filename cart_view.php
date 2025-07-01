@@ -37,6 +37,10 @@
 							<form method="POST" action="reserve_cart.php">
 								<button type="submit" name="action" value="reservar" class="btn btn-warning btn-lg btn-block">Reservar Paquetes</button>
 							</form>
+						<?php else: ?>
+							<div class="alert alert-info text-center">
+								<strong>Para pagar o reservar paquetes, por favor <a href="login.php">iniciá sesión</a> o <a href="signup.php">registrate</a>.</strong>
+							</div>
 						<?php endif; ?>
 					</div>
 					<div class="col-sm-3">
