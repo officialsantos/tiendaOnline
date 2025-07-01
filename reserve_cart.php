@@ -2,13 +2,14 @@
 include 'includes/session.php';
 require_once 'includes/conn.php';
 
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['user'])) {
     $_SESSION['error'] = 'Debes iniciar sesión para reservar.';
     header('Location: cart.php');
     exit();
 }
 
 $user_id = $_SESSION['user'];
+$accion = isset($_POST['action']) ? $_POST['action'] : 'reservar';  // Valor por defecto
 
 try {
     $conn = $pdo->open();
@@ -48,6 +49,9 @@ try {
             'price' => $precio_total,
             'duration_days' => $duracion
         ]);
+
+        $last_reservation_id = $conn->lastInsertId(); // Esto guarda el ID insertado más reciente
+
     }
 
     // Vaciar el carrito
@@ -57,7 +61,13 @@ try {
     $pdo->close();
 
     $_SESSION['success'] = "¡Reserva creada! Tienes 2 días para pagar antes de que caduque.";
-    header('Location: profile.php');
+
+    if ($accion == 'pagar') {
+        header('Location: pay_reservation.php?id=' . $last_reservation_id);
+    } else {
+        header('Location: profile.php');
+    }
+
     exit();
 
 } catch (PDOException $e) {
@@ -65,4 +75,4 @@ try {
     header('Location: profile.php');
     exit();
 }
-?>
+

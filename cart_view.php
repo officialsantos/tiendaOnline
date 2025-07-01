@@ -29,22 +29,15 @@
 								</table>
 							</div>
 						</div>
-						<?php
-						if(isset($_SESSION['user'])){
-							echo "
-								<div id='paypal-button'></div>
-								<br>
-								<form method='POST' action='reserve_cart.php'>
-									<button type='submit' class='btn btn-warning btn-lg btn-block'>Reservar Paquetes</button>
-								</form>
-							";
-						}
-						else{
-							echo "
-								<h4>Necesitas <a href='login.php'>Iniciar Sesión</a> para comprar.</h4>
-							";
-						}
-						?>
+						<?php if (isset($_SESSION['user'])): ?>
+							<form method="POST" action="reserve_cart.php">
+								<button type="submit" name="action" value="pagar" class="btn btn-primary btn-lg btn-block">Pagar</button>
+							</form>
+							<br>
+							<form method="POST" action="reserve_cart.php">
+								<button type="submit" name="action" value="reservar" class="btn btn-warning btn-lg btn-block">Reservar Paquetes</button>
+							</form>
+						<?php endif; ?>
 					</div>
 					<div class="col-sm-3">
 						<?php include 'includes/sidebar.php'; ?>
